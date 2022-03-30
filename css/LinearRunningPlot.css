@@ -2,3 +2,11 @@
 	width: auto;
 	height: 200px;
 }
+
+.LinearRunningPlot .container {
+	height: 150px;
+}
+
+.LinearRunningPlot .toolbar {
+	height: 50px;
+}

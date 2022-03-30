@@ -27,14 +27,20 @@ class LinearRunningPlot {
 		// Set the correct plot class
 		this.targetElement.attr("class", "Plot LinearRunningPlot");
 
-		this.dimensions = { "width": parseInt(this.targetElement.style('width'), 10),
-							"height": parseInt(this.targetElement.style('height'), 10),
+		// Add container and toolbar
+		this.container = this.targetElement.append("div")
+										   .attr("class", "container");
+		this.toolbar = this.targetElement.append("div")
+										 .attr("class", "toolbar");
+
+		this.dimensions = { "width": parseInt(this.container.style('width'), 10),
+							"height": parseInt(this.container.style('height'), 10),
 							"padding": 20 };
 
 		this.chartRange = this.dimensions["width"] - this.dimensions["padding"];
 
 		// Add a vector element
-		this.svg = this.targetElement.append("svg");
+		this.svg = this.container.append("svg");
 
 		// Create a scaler
 		this.scaler = d3.scaleLinear()
