@@ -127,7 +127,8 @@ class LinearRunningPlot {
 			this.effortPoints = this.effortPoints.style("animation-name", (point, index) => this.generateAnimationName(index))
 												 .style("animation-duration", `${this.bestTime}s`)
 												 .style("animation-timing-function", "linear")
-												 .attr("class", "paused");
+												 .attr("class", "paused")
+												 .on("animationend", () => { this.playing = false; });
 		}
 	}
 
