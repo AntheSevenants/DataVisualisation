@@ -1,0 +1,14 @@
+html, body {
+	width: 100%;
+	min-height: 100%;
+}
+
+body {
+	background-color: #eee;
+	font-family: 'Rubik', sans-serif;
+}
+
+main {
+	padding: 1em 30% 1em 30%;
+	box-sizing: border-box;
+}
