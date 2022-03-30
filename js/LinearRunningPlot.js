@@ -137,7 +137,7 @@ class LinearRunningPlot {
 	setAnimations() {
 		// We define an animation time which is equal to the fastest time in the dataset
 		this.effortPoints = this.effortPoints.style("animation-name", (point, index) => this.generateAnimationName(index))
-												 .style("animation-duration", `${2}s`)
+												 .style("animation-duration", `${this.bestTime}s`)
 												 .style("animation-timing-function", "linear")
 												 .attr("class", "paused");
 
