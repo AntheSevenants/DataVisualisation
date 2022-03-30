@@ -11,6 +11,12 @@ class LinearRunningPlot {
 		// Extract only the effort times (we need them for the scaler)
 		this.times = this.efforts.map(effort => effort["time"]);
 
+		// Best time (we need this multiple times)
+		this.bestTime = Math.min(...this.times);
+
+		// Should the plot be animated?
+		this.doAnimate = true;
+
 		this.initPlot();
 
 		this.drawTrack();
@@ -33,7 +39,7 @@ class LinearRunningPlot {
 		// Create a scaler
 		this.scaler = d3.scaleLinear()
 						// The domain of our data goes between 0 and the best time
-    					.domain([0, Math.min(...this.times)])
+    					.domain([0, this.bestTime])
     					.range([ this.dimensions["padding"], 
     						     this.chartRange ]);
 	}
@@ -81,5 +87,24 @@ class LinearRunningPlot {
 								  	.attr("stroke", "black")
 								  	.attr("fill", "#69B3A2")
 								  	.attr("pointIndex", (row, index) => index);
+
+		if (this.doAnimate) {
+			// We define a transition which is equal to the fastest time in the dataset
+			this.effortPoints = this.effortPoints.style("transform", 
+														(row, index) => this.generateStartLineTransform(index))
+												 .style("transition", `transform ${this.bestTime}s linear`);
+		}
+	}
+
+	// We need to "translateX" all points to the starting position of the plot
+	generateStartLineTransform(index) {
+		let transformLine = `translateX(${-this.effortPointCoordinates[index] + this.dimensions["padding"]}px)`;
+
+		return transformLine;
+	}
+
+	animate() {
+		// We now translateX back to 0, which will cause all circles to smooth to their original positions
+		this.effortPoints = this.effortPoints.style("transform", `translateX(0px)`);
 	}
 }
