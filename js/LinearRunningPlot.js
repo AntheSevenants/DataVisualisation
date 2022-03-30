@@ -21,6 +21,7 @@ class LinearRunningPlot {
 
 		// Is the animation currently playing?
 		this._playing = false;
+		this.ended = false;
 
 		this.initPlot();
 		this.initToolbar();
@@ -123,13 +124,22 @@ class LinearRunningPlot {
 				this.cssModifier.insertRule(animationRule)
 			});
 
-			// We define an animation time which is equal to the fastest time in the dataset
-			this.effortPoints = this.effortPoints.style("animation-name", (point, index) => this.generateAnimationName(index))
-												 .style("animation-duration", `${this.bestTime}s`)
-												 .style("animation-timing-function", "linear")
-												 .attr("class", "paused")
-												 .on("animationend", () => { this.playing = false; });
+			this.setAnimations();
 		}
+	}
+
+	setAnimations() {
+		// We define an animation time which is equal to the fastest time in the dataset
+		this.effortPoints = this.effortPoints.style("animation-name", (point, index) => this.generateAnimationName(index))
+												 .style("animation-duration", `${2}s`)
+												 .style("animation-timing-function", "linear")
+												 .attr("class", "paused");
+
+		// Animation end callback only needs to run for one element (the first one, for example)
+		d3.select(this.effortPoints.nodes()[0]).on("animationend", () => {
+	  		this.playing = false;
+	  		this.ended = true;
+		});
 	}
 
 	generateAnimationName(index) {
@@ -154,7 +164,19 @@ class LinearRunningPlot {
 	set playing(isPlaying) {
 		this._playing = isPlaying;
 
-		console.log(this.playing);
+		if (this.ended) {
+			console.log("hallooo");
+
+			// First, reset the animation name (needed in case the animation has already played)
+			this.effortPoints = this.effortPoints.style("animation-name", "")
+
+			// Trigger re-flow
+			this.effortPoints.style("width");
+
+			this.ended = false;
+
+			this.setAnimations();
+		}
 
 		// Add paused class only if not playing
 		this.effortPoints = this.effortPoints.classed("paused", !this.playing);
