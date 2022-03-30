@@ -24,3 +24,7 @@ main {
 	width: 100%;
 	height: 100%;
 }
+
+.Plot .paused {
+	animation-play-state: paused;
+}
