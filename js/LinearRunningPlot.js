@@ -64,6 +64,12 @@ class LinearRunningPlot {
 									Constants.playIcon,
 									"",
 									() => { this.togglePlayPause(); });
+
+		this.toolbar.registerButton("stop",
+									Constants.stopIcon,
+									"",
+									() => { this.playing = false;
+											this.resetAnimation(); });
 	}
 
 	// We need to "invert" the scale, because low values = good, high values = bad
@@ -157,6 +163,19 @@ class LinearRunningPlot {
 		this.effortPoints = this.effortPoints.style("transform", `translateX(0px)`);
 	}
 
+	resetAnimation() {
+		// First, reset the animation name (needed in case the animation has already played)
+		this.effortPoints = this.effortPoints.style("animation-name", "")
+
+		// Trigger re-flow
+		this.effortPoints.style("width");
+
+		this.ended = false;
+
+		this.setAnimations();
+
+	}
+
 	get playing() {
 		return this._playing;
 	}
@@ -165,17 +184,7 @@ class LinearRunningPlot {
 		this._playing = isPlaying;
 
 		if (this.ended) {
-			console.log("hallooo");
-
-			// First, reset the animation name (needed in case the animation has already played)
-			this.effortPoints = this.effortPoints.style("animation-name", "")
-
-			// Trigger re-flow
-			this.effortPoints.style("width");
-
-			this.ended = false;
-
-			this.setAnimations();
+			this.resetAnimation();
 		}
 
 		// Add paused class only if not playing
