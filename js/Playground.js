@@ -6,3 +6,6 @@ let linearRunningPlot = new LinearRunningPlot("linearRunningPlot",
 											  	{ "time": 38 },
 											  	{ "time": 41 },
 											  	{ "time": 42 } ]);
+
+document.getElementById("linearRunningPlotAnimate")
+		.onclick = () => { linearRunningPlot.animate(); };
