@@ -1,3 +1,7 @@
-.Table .ResultsTable {
-	
+.Table.ResultsTable {
+
+}
+
+.Table.ResultsTable table {
+	text-align: right;
 }
