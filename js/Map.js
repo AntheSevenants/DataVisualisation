@@ -1,5 +1,5 @@
 class Map {
-	constructor(targetElementName, coordinates, polyline=null) {
+	constructor(targetElementName, coordinates, polyCoords=null) {
 		// Find the target element in the DOM
 		this.targetElement = d3.select(`#${targetElementName}`);
 		this.targetElement.attr("class", "Map");
@@ -15,9 +15,7 @@ class Map {
 
 		OpenStreetMap_Mapnik.addTo(this.map);
 
-		if (polyline !== null) {
-			let polyCoords = PolylineDecoder.decode(polyline);
-			console.log(polyCoords);
+		if (polyCoords !== null) {
 			this.setPolyline(polyCoords);
 		}
 
@@ -26,13 +24,7 @@ class Map {
 
 	setPolyline(latlngs, color="red") {
 		this.polyline = L.polyline(latlngs, {color: color});
-		this.animatedMarker = L.animatedMarker(this.polyline.getLatLngs(),
-											  { autoStart: false,
-											    distance: 226,
-											    interval: 33 * 1000 });
-
 		this.polyline.addTo(this.map);
-		this.animatedMarker.addTo(this.map);
 	}
 
 	disableMapFunctions() {
@@ -42,9 +34,5 @@ class Map {
 		this.map.boxZoom.disable();
 		this.map.keyboard.disable();
 		this.map.dragging.disable();
-	}
-
-	animate() {
-		this.animatedMarker.start();
 	}
 }
