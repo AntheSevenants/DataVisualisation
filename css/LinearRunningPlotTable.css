@@ -1,0 +1,16 @@
+.LinearRunningPlotTable {
+	display: flex;
+	justify-content: center;
+}
+
+.LinearRunningPlotTable .Plot {
+	width: calc(100% - 8em);
+}
+
+.LinearRunningPlotTable .Table {
+	width: 8em;
+}
+
+.LinearRunningPlotTable .Table table {
+	width: 100%;
+}
