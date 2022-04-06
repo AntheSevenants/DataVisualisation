@@ -43,7 +43,7 @@ class LinearRunningPlot {
 
 		this.dimensions = { "width": parseInt(this.container.style('width'), 10),
 							"height": parseInt(this.container.style('height'), 10),
-							"padding": 20 };
+							"padding": 30 };
 
 		this.chartRange = this.dimensions["width"] - this.dimensions["padding"];
 
