@@ -5,4 +5,5 @@ let linearRunningPlot = new LinearRunningPlot("linearRunningPlot",
 											  	{ "time": 36 },
 											  	{ "time": 38 },
 											  	{ "time": 41 },
-											  	{ "time": 42 } ]);
+											  	{ "time": 42 } ],
+											  3);
