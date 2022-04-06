@@ -131,6 +131,7 @@ class LinearRunningPlot {
 								  	.attr("r", 10)
 								  	.attr("stroke", "black")
 								  	.attr("fill", "#69B3A2")
+									.attr("fill-opacity", 0.7)
 								  	.attr("pointIndex", (row, index) => index);
 
 		if (this.doAnimate) {
