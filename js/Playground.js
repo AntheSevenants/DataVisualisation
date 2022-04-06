@@ -11,3 +11,8 @@ let linearRunningPlot = new LinearRunningPlot("linearRunningPlot",
 											  3);
 
 let resultsTable = new ResultsTable("resultsTable", efforts);
+
+let linearRunningPlotTable = new LinearRunningPlotTable("linearRunningPlotTable",
+											  240,
+											  efforts,
+											  3);
