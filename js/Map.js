@@ -26,7 +26,13 @@ class Map {
 
 	setPolyline(latlngs, color="red") {
 		this.polyline = L.polyline(latlngs, {color: color});
+		this.animatedMarker = L.animatedMarker(this.polyline.getLatLngs(),
+											  { autoStart: false,
+											    distance: 226,
+											    interval: 33 * 1000 });
+
 		this.polyline.addTo(this.map);
+		this.animatedMarker.addTo(this.map);
 	}
 
 	disableMapFunctions() {
@@ -36,5 +42,9 @@ class Map {
 		this.map.boxZoom.disable();
 		this.map.keyboard.disable();
 		this.map.dragging.disable();
+	}
+
+	animate() {
+		this.animatedMarker.start();
 	}
 }
