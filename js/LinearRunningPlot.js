@@ -27,6 +27,7 @@ class LinearRunningPlot {
 		this.initToolbar();
 
 		this.drawTrack();
+		this.drawText();
 		this.drawEfforts();
 	}
 
@@ -87,6 +88,22 @@ class LinearRunningPlot {
 				.attr("y1", this.lineHeight)
 				.attr("x2", this.chartRange)
 				.attr("y2", this.lineHeight); 
+	}
+
+	drawText() {
+		// 0m
+		this.svg.append("text")
+				.attr("x", this.dimensions["padding"])
+				.attr("y", this.lineHeight + 40)
+				.attr("text-anchor", "middle")
+				.text("0m");
+
+		// segment lent m
+		this.svg.append("text")
+				.attr("x", this.chartRange)
+				.attr("y", this.lineHeight + 40)
+				.attr("text-anchor", "middle")
+				.text(`${this.length}m`);
 	}
 
 	generateCoordinates() {
