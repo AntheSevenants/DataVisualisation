@@ -9,5 +9,9 @@ let linearRunningPlotTable = new LinearRunningPlotTable("linearRunningPlotTable"
 											  240,
 											  efforts,
 											  3);
-
-let map = new Map("geoRunningMap", [50.87585, 4.70450], "szouHgbv[\\d@VV\\Pd@h@`A`C^rANVJ`@DDNDFc@");
+let map;
+d3.json("data/segment_11092875.json").then(segment => {
+	map = new GeoRunningPlot("geoRunningMap", 
+					  segment,
+					  efforts);
+});
