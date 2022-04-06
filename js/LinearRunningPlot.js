@@ -1,5 +1,5 @@
 class LinearRunningPlot {
-	constructor(targetElementName, length, efforts) {
+	constructor(targetElementName, length, efforts, multiplier=1) {
 		// Find the target element in the DOM
 		this.targetElement = d3.select(`#${targetElementName}`);
 
@@ -15,6 +15,9 @@ class LinearRunningPlot {
 
 		// Best time (we need this multiple times)
 		this.bestTime = Math.min(...this.times);
+
+		// Multiplier (make the animation end faster)
+		this.multiplier = multiplier;
 
 		// Should the plot be animated?
 		this.doAnimate = true;
@@ -104,6 +107,13 @@ class LinearRunningPlot {
 				.attr("y", this.lineHeight + 40)
 				.attr("text-anchor", "middle")
 				.text(`${this.length}m`);
+
+		// Multiplier
+		this.svg.append("text")
+				.attr("x", this.dimensions["width"] / 2)
+				.attr("y", this.lineHeight + 40)
+				.attr("text-anchor", "middle")
+				.text(`x${this.multiplier} speed`);
 	}
 
 	generateCoordinates() {
@@ -155,7 +165,7 @@ class LinearRunningPlot {
 	setAnimations() {
 		// We define an animation time which is equal to the fastest time in the dataset
 		this.effortPoints = this.effortPoints.style("animation-name", (point, index) => this.generateAnimationName(index))
-												 .style("animation-duration", `${this.bestTime}s`)
+												 .style("animation-duration", `${this.bestTime / this.multiplier}s`)
 												 .style("animation-timing-function", "linear")
 												 .attr("class", "paused");
 
