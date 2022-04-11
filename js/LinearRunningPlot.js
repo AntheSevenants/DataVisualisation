@@ -2,15 +2,13 @@ class LinearRunningPlot extends Plot {
 	constructor(targetElementName, length, efforts, toolbar=false, multiplier=1) {
 		super(targetElementName, "Plot LinearRunningPlot", toolbar);
 
-		this.name = "example";
-
 		// Length of the segment in meters
 		this.length = length
 		// Arary for efforts for this segmetn
 		this.efforts = efforts;
 
 		// Extract only the effort times (we need them for the scaler)
-		this.times = this.efforts.map(effort => effort["time"]);
+		this.times = this.efforts.map(effort => +effort["time"]);
 
 		// Best time (we need this multiple times)
 		this.bestTime = Math.min(...this.times);
@@ -171,7 +169,7 @@ class LinearRunningPlot extends Plot {
 	}
 
 	generateAnimationName(index) {
-		return `${this.name}_${index}`;
+		return `${this.targetElementName}_${index}`;
 	}
 
 	generateStartLineTransform(index) {
@@ -182,7 +180,7 @@ class LinearRunningPlot extends Plot {
 
 	animate() {
 		// We now translateX back to 0, which will cause all circles to smooth to their original positions
-		this.effortPoints = this.effortPoints.style("transform", `translateX(0px)`);
+		//this.effortPoints = this.effortPoints.style("transform", `translateX(0px)`);
 	}
 
 	resetAnimation() {
