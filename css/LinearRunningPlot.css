@@ -6,22 +6,3 @@
 .LinearRunningPlot .container {
 	height: 150px;
 }
-
-.LinearRunningPlot .toolbar {
-	height: 50px;
-}
-
-.LinearRunningPlot .toolbar button {
-	width: 3em;
-	height: 3em;
-
-	margin-right: 1em;
-
-	outline: none;
-
-	border-radius: 50%;
-
-	border: none;
-
-	border: 1px solid #111;
-}
