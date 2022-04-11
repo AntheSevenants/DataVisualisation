@@ -3,6 +3,9 @@ class GeoRunningPlot extends Map {
 		// Decode polyline from segment
 		let polyCoords = PolylineDecoder.decode(segment["polyline"]);
 
+		let interpolator = new LatLongInterpolator(polyCoords);
+		polyCoords = interpolator.interpolate();
+
 		// To find the focus for our map, we take the middle element of the polyline
 		let centreCoord = polyCoords[Math.round((polyCoords.length - 1) / 3)];
 
