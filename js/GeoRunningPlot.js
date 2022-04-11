@@ -56,7 +56,7 @@ class GeoRunningPlot extends Map {
 											  			    			   iconSize: 64 }),
 											  			    interval: effort["time"] * 1000,
 											  			    onEnd: () => { this.ended = true;
-											  			    			   if (index == this.efforts.length - 1) {
+											  			    			   if (index == 0) {
 											  			    			   	this.playing = false;
 											  			    			   } } }));
 
@@ -72,6 +72,7 @@ class GeoRunningPlot extends Map {
 
 		if (this.playing) {
 			if (this.ended) {
+				this.ended = false;
 				this.initAnimation();
 			}
 
