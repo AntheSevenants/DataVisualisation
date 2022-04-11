@@ -103,6 +103,21 @@ class LinearRunningPlot extends Plot {
 	drawEfforts() {
 		this.generateCoordinates();
 
+		let avatars = this.svg.append("defs")
+							  .selectAll(null)
+		    				  .data(this.efforts)
+		    				  .enter()
+		    				  .append("pattern")
+		    				  .attr("id", (d, index) => `pattern_${index}`)
+		    				  .attr("height", "100%")
+		    				  .attr("width", "100%")
+		    				  .attr("patternContentUnits", "objectBoundingBox")
+		    				  .append("image")
+		    				  .attr("height", 1)
+		    				  .attr("width", 1)
+		    				  .attr("preserveAspectRatio", "none")
+		    				  .attr("xlink:href", (d, index) => `minimap/${index}.png`);
+
 		this.effortPoints = this.svg.append("g") // create another SVG group
 								   	// give it the "dot" class
 								    .attr("class", "dot") 
@@ -117,10 +132,11 @@ class LinearRunningPlot extends Plot {
 								  	.attr("cx", (row, index) => this.effortPointCoordinates[index])
 								  	.attr("cy", this.lineHeight)
 								  	.attr("r", 10)
-								  	.attr("stroke", "black")
+								  	//.attr("stroke", "black")
 								  	.attr("fill", "#69B3A2")
-									.attr("fill-opacity", 0.7)
-								  	.attr("pointIndex", (row, index) => index);
+									//.attr("fill-opacity", 0.7)
+								  	.attr("pointIndex", (row, index) => index)
+								  	.style("fill", (d, index) => `url(#pattern_${index})`);
 
 		if (this.doAnimate) {
 			// We'll need a CSS modifier to add the animation rules to a stylesheet
