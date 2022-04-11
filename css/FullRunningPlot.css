@@ -1,0 +1,16 @@
+.FullRunningPlot {
+	display: flex;
+	justify-content: center;
+}
+
+.FullRunningPlot > .container {
+	width: calc(100% - 8em);
+}
+
+.FullRunningPlot .Table {
+	width: 8em;
+}
+
+.FullRunningPlot .Table table {
+	width: 100%;
+}

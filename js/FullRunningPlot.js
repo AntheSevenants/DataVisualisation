@@ -1,12 +1,19 @@
 class FullRunningPlot extends Plot {
 	constructor(targetElementName, segment, efforts, multiplier) {
-		super(targetElementName, "FullRunningPlot", false, true);
+		super(targetElementName, "FullRunningPlot", false, false);
 
-		// LinearRunningPlotTable
-		let linearRunningPlotTableName = `${targetElementName}-linear`;
+		// Table
+		let tableId = `${targetElementName}-table`;
+		this.originalTargetElement.append("div")
+						  		  .attr("id", tableId);
+		this.resultsTable = new ResultsTable(tableId,
+											 efforts);
+
+		// LinearRunningPlot
+		let linearRunningPlotName = `${targetElementName}-linear`;
 		this.targetElement.append("div")
-						  .attr("id", linearRunningPlotTableName);
-		this.linearRunningPlotTable = new LinearRunningPlotTable(linearRunningPlotTableName,
+						  .attr("id", linearRunningPlotName);
+		this.linearRunningPlotTable = new LinearRunningPlot(linearRunningPlotName,
 															segment["distance"],
 															efforts,
 															this.toolbar);
@@ -22,19 +29,19 @@ class FullRunningPlot extends Plot {
 	}
 
 	togglePlayPause() {
-		this.linearRunningPlotTable.linearRunningPlot.playing = 
-			!this.linearRunningPlotTable.linearRunningPlot.playing;
+		this.linearRunningPlotTable.playing = 
+			!this.linearRunningPlotTable.playing;
 
 		this.geoRunningPlot.playing = !this.geoRunningPlot.playing;
 	}
 
 	set playing(isPlaying) {
-		this.linearRunningPlotTable.linearRunningPlot.playing = isPlaying;
+		this.linearRunningPlotTable.playing = isPlaying;
 		this.geoRunningPlot.playing = isPlaying;
 	}
 
 	resetAnimation() {
-		this.linearRunningPlotTable.linearRunningPlot.resetAnimation();
+		this.linearRunningPlotTable.resetAnimation();
 		this.geoRunningPlot.resetAnimation();
 	}
 }

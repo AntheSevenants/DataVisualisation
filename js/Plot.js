@@ -21,6 +21,7 @@ class Plot {
 										   .attr("class", "container")
 										   .attr("id", this.targetElementName);
 
+		this.originalTargetElement = this.targetElement;
 		this.targetElement = this.container;
 	}
 
