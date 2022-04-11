@@ -41,5 +41,10 @@ class Plot {
 									"",
 									() => { this.playing = false;
 											this.resetAnimation(); });
+
+		this.toolbar.registerButton("coords",
+									"COORDS",
+									"",
+									() => { this.getCoords(); });
 	}
 }

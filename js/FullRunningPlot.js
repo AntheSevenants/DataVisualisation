@@ -44,4 +44,11 @@ class FullRunningPlot extends Plot {
 		this.linearRunningPlotTable.resetAnimation();
 		this.geoRunningPlot.resetAnimation();
 	}
+
+	getCoords() {
+		let obj = { "coords": this.geoRunningPlot.map.getCenter(),
+					"zoom": this.geoRunningPlot.map.getZoom() };
+
+		navigator.clipboard.writeText(JSON.stringify(obj));
+	}
 }
