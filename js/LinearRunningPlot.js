@@ -61,7 +61,7 @@ class LinearRunningPlot extends Plot {
 		this.lineHeight = 40;
 
 		this.svg.append('line')
-				.style("stroke", "lightgreen")
+				.style("stroke", "#FD661E")
 				.style("stroke-width", 10)
 				.attr("x1", this.dimensions["padding"])
 				.attr("y1", this.lineHeight)

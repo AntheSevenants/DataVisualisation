@@ -20,7 +20,7 @@ class Map extends Plot {
 		//this.disableMapFunctions();
 	}
 
-	setPolyline(latlngs, color="red") {
+	setPolyline(latlngs, color="#FD661E") {
 		this.polyline = L.polyline(latlngs, {color: color});
 		this.polyline.addTo(this.map);
 	}
