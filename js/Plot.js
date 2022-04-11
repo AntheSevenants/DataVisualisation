@@ -6,10 +6,6 @@ class Plot {
 
 		console.log(targetElementName, "notoolbar:", noToolbar);
 
-		if (!noToolbar) {
-			this.initToolbar();
-		}
-
 		if (noContainer) {
 			this.targetElementName = targetElementName;
 			return;
@@ -23,10 +19,14 @@ class Plot {
 
 		this.originalTargetElement = this.targetElement;
 		this.targetElement = this.container;
+
+		if (!noToolbar) {
+			this.initToolbar();
+		}
 	}
 
 	initToolbar() {
-		this.toolbar = this.targetElement.append("div")
+		this.toolbar = this.originalTargetElement.append("div")
 										 .attr("class", "toolbar");
 
 		this.toolbar = new Toolbar(this.toolbar);

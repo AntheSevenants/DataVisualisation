@@ -2,6 +2,11 @@ class FullRunningPlot extends Plot {
 	constructor(targetElementName, segment, efforts, multiplier) {
 		super(targetElementName, "FullRunningPlot", false, false);
 
+		// Title
+		let titleDiv = this.originalTargetElement.append("div").lower()
+												 .attr("class", "title")
+												 .text(segment["name"]);
+
 		// Inner container
 		let innerContainerId = `${targetElementName}-inner`;
 		this.innerContainer = this.targetElement.append("div")

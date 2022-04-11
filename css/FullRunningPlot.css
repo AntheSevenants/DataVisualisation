@@ -1,4 +1,13 @@
-.FullRunningPlot > .container{
+.FullRunningPlot {
+	background-color: white;
+	border-radius: 15px;
+
+	padding: 15px;
+
+	margin-bottom: 15px;
+}
+
+.FullRunningPlot > .container {
 	display: flex;
 	justify-content: center;
 }

@@ -29,7 +29,14 @@ main {
 	animation-play-state: paused;
 }
 
+.title {
+	margin-bottom: 15px;
+	font-size: 1.2em;
+	font-weight: 400;
+}
+
 .toolbar {
+	margin-top: 15px;
 	height: 50px;
 }
 
