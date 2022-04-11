@@ -1,5 +1,5 @@
 class GeoRunningPlot extends Map {
-	constructor(targetElementName, segment, efforts, multiplier=1) {
+	constructor(targetElementName, segment, efforts, toolbar, multiplier=1) {
 		// Decode polyline from segment
 		let polyCoords = PolylineDecoder.decode(segment["polyline"]);
 
@@ -9,13 +9,17 @@ class GeoRunningPlot extends Map {
 		// To find the focus for our map, we take the middle element of the polyline
 		let centreCoord = polyCoords[Math.round((polyCoords.length - 1) / 3)];
 
-		super(targetElementName, centreCoord, polyCoords, true);
+		super(targetElementName, centreCoord, polyCoords, toolbar);
 
 		this.segment = segment;
 		this.efforts = efforts;
 
 		this.animatedMarkers = [];
 		this._playing = false;
+
+		if (toolbar) {
+			this.toolbar = toolbar;
+		}
 
 		this.resetAnimation();
 
@@ -58,9 +62,9 @@ class GeoRunningPlot extends Map {
 			this.stop();
 		}
 
-		this.toolbar.buttons["play"].text(this.playing ?
+		/*this.toolbar.buttons["play"].text(this.playing ?
 										  Constants.pauseIcon :
-										  Constants.playIcon);
+										  Constants.playIcon);*/
 	}
 
 	togglePlayPause() {

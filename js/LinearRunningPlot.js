@@ -1,6 +1,6 @@
 class LinearRunningPlot extends Plot {
-	constructor(targetElementName, length, efforts, multiplier=1) {
-		super(targetElementName, "Plot LinearRunningPlot", true);
+	constructor(targetElementName, length, efforts, toolbar=false, multiplier=1) {
+		super(targetElementName, "Plot LinearRunningPlot", toolbar);
 
 		this.name = "example";
 
@@ -26,6 +26,10 @@ class LinearRunningPlot extends Plot {
 		this.ended = false;
 
 		this.initPlot();
+
+		if (toolbar) {
+			this.toolbar = toolbar;
+		}
 
 		this.drawTrack();
 		this.drawText();
@@ -193,8 +197,8 @@ class LinearRunningPlot extends Plot {
 		this.effortPoints = this.effortPoints.classed("paused", !this.playing);
 
 		this.toolbar.buttons["play"].text(this.playing ?
-										  Constants.pauseIcon :
-										  Constants.playIcon);
+									  Constants.pauseIcon :
+									  Constants.playIcon);
 	}
 
 	togglePlayPause() {

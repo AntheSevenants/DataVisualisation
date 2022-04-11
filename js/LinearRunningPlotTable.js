@@ -1,5 +1,5 @@
 class LinearRunningPlotTable {
-	constructor(targetElementName, length, efforts, multiplier=1) {
+	constructor(targetElementName, length, efforts, toolbar, multiplier=1) {
 		// Find the target element in the DOM
 		this.targetElement = d3.select(`#${targetElementName}`);
 		this.targetElement.attr("class", "LinearRunningPlotTable");
@@ -12,12 +12,13 @@ class LinearRunningPlotTable {
 		this.targetElement.append("div")
 						  .attr("id", tableId);
 
-		let linearRunningPlot = new LinearRunningPlot(plotId,
+		this.linearRunningPlot = new LinearRunningPlot(plotId,
 													  length,
 													  efforts,
+													  toolbar,
 													  multiplier);
 
-		let resultsTable = new ResultsTable(tableId,
+		this.resultsTable = new ResultsTable(tableId,
 											efforts);
 	}
 }

@@ -1,13 +1,18 @@
 class Plot {
-	constructor(targetElementName, plotType, toolbar=false) {
+	constructor(targetElementName, plotType, noToolbar=false, noContainer=false) {
 		// Find the target element in the DOM
 		this.targetElement = d3.select(`#${targetElementName}`);
 		this.targetElement.attr("class", `${plotType}`);
 
-		console.log(targetElementName, this.targetElement);
+		console.log(targetElementName, "notoolbar:", noToolbar);
 
-		if (toolbar) {
+		if (!noToolbar) {
 			this.initToolbar();
+		}
+
+		if (noContainer) {
+			this.targetElementName = targetElementName;
+			return;
 		}
 
 		this.targetElementName = `${targetElementName}-container`;
