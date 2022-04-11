@@ -2,6 +2,8 @@ class FullRunningPlot extends Plot {
 	constructor(targetElementName, segment, efforts, multiplier) {
 		super(targetElementName, "FullRunningPlot", false, false);
 
+		this.segment = segment;
+
 		// Title
 		let titleDiv = this.originalTargetElement.append("div").lower()
 												 .attr("class", "title")
@@ -57,7 +59,8 @@ class FullRunningPlot extends Plot {
 	}
 
 	getCoords() {
-		let obj = { "coords": this.geoRunningPlot.map.getCenter(),
+		let obj = { "name": segment["name"],
+					"coords": this.geoRunningPlot.map.getCenter(),
 					"zoom": this.geoRunningPlot.map.getZoom() };
 
 		navigator.clipboard.writeText(JSON.stringify(obj));
