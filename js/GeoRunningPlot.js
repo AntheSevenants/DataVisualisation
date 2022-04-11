@@ -34,7 +34,7 @@ class GeoRunningPlot extends Map {
 											  			  { autoStart: false,
 											  			    distance: this.segment["distance"],
 											  			    icon: L.icon({ iconUrl: `minimap/${index}.png`,
-											  			    			   iconSize: 64 }),
+											  			    			   iconSize: 32 }),
 											  			    interval: effort["time"] * 1000,
 											  			    onEnd: () => { this.ended = true;
 											  			    			   if (index == 0) {
