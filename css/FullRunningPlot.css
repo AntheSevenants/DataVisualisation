@@ -1,9 +1,9 @@
-.FullRunningPlot {
+.FullRunningPlot > .container{
 	display: flex;
 	justify-content: center;
 }
 
-.FullRunningPlot > .container {
+.FullRunningPlot > .container > .inner {
 	width: calc(100% - 8em);
 }
 
