@@ -6,6 +6,8 @@ class Toolbar {
 	}
 
 	registerButton(name, content, className, onClickEvent) {
+		console.log(this.targetElement);
+
 		this.buttons[name] = this.targetElement.append("button")
 											   .attr("id", name)
 											   .text(content)

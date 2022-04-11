@@ -9,14 +9,7 @@ class GeoRunningPlot extends Map {
 		// To find the focus for our map, we take the middle element of the polyline
 		let centreCoord = polyCoords[Math.round((polyCoords.length - 1) / 3)];
 
-		let containerName = `${targetElementName}-container`;
-		let targetElement = d3.select(`#${targetElementName}`);
-		let container = targetElement.append("div")
-					    			.attr("id", containerName);
-
-		super(containerName, centreCoord, polyCoords=polyCoords);
-
-		this.targetElement = targetElement;
+		super(targetElementName, centreCoord, polyCoords, true);
 
 		this.segment = segment;
 		this.efforts = efforts;
@@ -24,28 +17,12 @@ class GeoRunningPlot extends Map {
 		this.animatedMarkers = [];
 		this._playing = false;
 
-		this.initPlot();
-		this.initToolbar();
-		this.initAnimation();
+		this.resetAnimation();
 
 		this.ended = false;
 	}
 
-	initPlot() {
-		this.toolbar = this.targetElement.append("div")
-										 .attr("class", "toolbar");
-	}
-
-	initToolbar() {
-		this.toolbar = new Toolbar(this.toolbar);
-
-		this.toolbar.registerButton("play",
-									Constants.playIcon,
-									"",
-									() => { this.togglePlayPause(); });
-	}
-
-	initAnimation() {
+	resetAnimation() {
 		// Remove existing markers
 		this.animatedMarkers.forEach(animatedMarker => this.map.removeLayer(animatedMarker));
 
@@ -73,7 +50,7 @@ class GeoRunningPlot extends Map {
 		if (this.playing) {
 			if (this.ended) {
 				this.ended = false;
-				this.initAnimation();
+				this.resetAnimation();
 			}
 
 			this.animate();

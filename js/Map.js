@@ -1,11 +1,9 @@
-class Map {
-	constructor(targetElementName, coordinates, polyCoords=null) {
-		// Find the target element in the DOM
-		this.targetElement = d3.select(`#${targetElementName}`);
-		this.targetElement.attr("class", "Map");
+class Map extends Plot {
+	constructor(targetElementName, coordinates, polyCoords=null, toolbar=false) {
+		super(targetElementName, "Map", toolbar);
 
 		// Initialise the map
-		this.map = L.map(targetElementName, { "zoomControl": false })
+		this.map = L.map(this.targetElementName, { "zoomControl": false })
 					.setView(coordinates, 18);
 
 		let OpenStreetMap_Mapnik = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {

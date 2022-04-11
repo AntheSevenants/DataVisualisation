@@ -1,7 +1,6 @@
-class LinearRunningPlot {
+class LinearRunningPlot extends Plot {
 	constructor(targetElementName, length, efforts, multiplier=1) {
-		// Find the target element in the DOM
-		this.targetElement = d3.select(`#${targetElementName}`);
+		super(targetElementName, "Plot LinearRunningPlot", true);
 
 		this.name = "example";
 
@@ -27,7 +26,6 @@ class LinearRunningPlot {
 		this.ended = false;
 
 		this.initPlot();
-		this.initToolbar();
 
 		this.drawTrack();
 		this.drawText();
@@ -35,15 +33,6 @@ class LinearRunningPlot {
 	}
 
 	initPlot() {
-		// Set the correct plot class
-		this.targetElement.attr("class", "Plot LinearRunningPlot");
-
-		// Add container and toolbar
-		this.container = this.targetElement.append("div")
-										   .attr("class", "container");
-		this.toolbar = this.targetElement.append("div")
-										 .attr("class", "toolbar");
-
 		this.dimensions = { "width": parseInt(this.container.style('width'), 10),
 							"height": parseInt(this.container.style('height'), 10),
 							"padding": 30 };
@@ -51,7 +40,7 @@ class LinearRunningPlot {
 		this.chartRange = this.dimensions["width"] - this.dimensions["padding"];
 
 		// Add a vector element
-		this.svg = this.container.append("svg");
+		this.svg = this.targetElement.append("svg");
 
 		// Create a scaler
 		this.scaler = d3.scaleLinear()
@@ -59,21 +48,6 @@ class LinearRunningPlot {
     					.domain([0, this.bestTime])
     					.range([ this.dimensions["padding"], 
     						     this.chartRange ]);
-	}
-
-	initToolbar() {
-		this.toolbar = new Toolbar(this.toolbar);
-
-		this.toolbar.registerButton("play",
-									Constants.playIcon,
-									"",
-									() => { this.togglePlayPause(); });
-
-		this.toolbar.registerButton("stop",
-									Constants.stopIcon,
-									"",
-									() => { this.playing = false;
-											this.resetAnimation(); });
 	}
 
 	// We need to "invert" the scale, because low values = good, high values = bad
