@@ -59,7 +59,7 @@ class FullRunningPlot extends Plot {
 	}
 
 	getCoords() {
-		let obj = { "name": segment["name"],
+		let obj = { "name": this.segment["name"],
 					"coords": this.geoRunningPlot.map.getCenter(),
 					"zoom": this.geoRunningPlot.map.getZoom() };
 
