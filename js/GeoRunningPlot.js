@@ -11,19 +11,35 @@ class GeoRunningPlot extends Map {
 		this.segment = segment;
 		this.efforts = efforts;
 
-		this.initAnimation()
+		this.animatedMarkers = [];
+
+		this.initAnimation();
+
+		this.ended = false;
 	}
 
 	initAnimation() {
+		// Remove existing markers
+		this.animatedMarkers.forEach(animatedMarker => this.map.removeLayer(animatedMarker));
+
 		this.animatedMarkers = this.efforts.map(effort => L.animatedMarker(this.polyline.getLatLngs(),
 											  			  { autoStart: false,
 											  			    distance: this.segment["distance"],
-											  			    interval: effort["time"] * 1000 }));
+											  			    interval: effort["time"] * 1000,
+											  			    onEnd: () => { this.ended = true; } }));
 
 		this.animatedMarkers.forEach(animatedMarker => animatedMarker.addTo(this.map));
 	}
 
-	animate() {
+	togglePlayPause() {
+		if (this.ended) {
+			this.initAnimation();
+		} 
+
 		this.animatedMarkers.forEach(animatedMarker => animatedMarker.start());
+	}
+
+	stop() {
+		this.animatedMarkers.forEach(animatedMarker => animatedMarker.stop());
 	}
 }
