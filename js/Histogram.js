@@ -2,6 +2,9 @@ class Histogram extends ClassicPlot {
 	constructor(targetElementName, data) {
 		super(targetElementName, "Histogram", false);
 
+		this.centralColumn = "pace";
+		this.affirmativeActionFunction = value => value;
+
 		this.padding = 40;
 		this.data = data.filter(row => +row["pace"] > 30 && +row["pace"] < 800);
 		this.paces = this.data.map(row => +row["pace"]);
@@ -52,7 +55,7 @@ class Histogram extends ClassicPlot {
 		this.toolbar.registerSlider("slider",
 							[0.01, 1, 0.01],
 							1,
-							(value) => { console.log(value) });
+							(event) => { console.log(event.target.value); });
 	}
 
 	drawPlot() {
@@ -66,7 +69,11 @@ class Histogram extends ClassicPlot {
 
   		// set the parameters for the histogram
   		this.histogram = d3.histogram()
-      					   .value((d) => this.secondsToDate(+d["pace"]))   // I need to give the vector of value
+      					   .value((d) => { let value = +d[this.centralColumn];
+      					   				   if (d["athlete_gender"] == "F") {
+      					   				   	value = this.affirmativeActionFunction(value);
+      					   				   }
+      					   				return this.secondsToDate(value); })   // I need to give the vector of value
       					   .domain(this.scaleX.domain())  // then the domain of the graphic
       					   .thresholds(this.scaleX.ticks(20)); // then the numbers of bins
 
