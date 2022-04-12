@@ -2,7 +2,8 @@ class Toolbar {
 	constructor(targetElement) {
 		// Where is the toolbar located?
 		this.targetElement = targetElement;
-		this.buttons = {};
+		this.elements = {}
+		this.buttons = this.elements;
 	}
 
 	registerButton(name, content, className, onClickEvent) {
@@ -13,5 +14,15 @@ class Toolbar {
 											   .text(content)
 											   .attr("class", className)
 											   .on("click", onClickEvent);
+	}
+
+	registerSlider(name, range, default_value, onChangeEvent) {
+		this.elements[name] = this.targetElement.append("input")
+												.attr("type", "range")
+												.attr("min", range[0].toString())
+												.attr("max", range[1].toString())
+												.attr("step", range[2].toString())
+												.attr("value", default_value)
+												.on("change", onChangeEvent);
 	}
 }
