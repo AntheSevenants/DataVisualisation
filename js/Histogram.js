@@ -1,6 +1,6 @@
 class Histogram extends ClassicPlot {
 	constructor(targetElementName, data) {
-		super(targetElementName, "Histogram", true);
+		super(targetElementName, "Histogram", false);
 
 		this.padding = 40;
 		this.data = data.filter(row => +row["pace"] > 30 && +row["pace"] < 800);
@@ -40,6 +40,19 @@ class Histogram extends ClassicPlot {
 
     	this.scaleY = d3.scaleLinear()
     					.range([this.chartRangeHeight, 0]);
+	}
+
+	initToolbar() {
+		this.toolbar = this.originalTargetElement.append("div")
+										 .attr("class", "toolbar");
+
+		this.toolbar = new Toolbar(this.toolbar);
+
+
+		this.toolbar.registerSlider("slider",
+							[0.01, 1, 0.01],
+							1,
+							(value) => { console.log(value) });
 	}
 
 	drawPlot() {
