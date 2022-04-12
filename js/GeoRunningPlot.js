@@ -32,6 +32,7 @@ class GeoRunningPlot extends Map {
 
 		this.animatedMarkers = this.efforts.map((effort, index) => L.animatedMarker(this.polyline.getLatLngs(),
 											  			  { autoStart: false,
+											  			  	zIndexOffset: 1000 - index,
 											  			    distance: this.segment["distance"],
 											  			    icon: L.icon({ iconUrl: `minimap/${index}.png`,
 											  			    			   iconSize: 32 }),
