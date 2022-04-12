@@ -11,4 +11,7 @@ let segments = [ "10804677",
 				 "8687556",
 				 "900905" ]
 
-let segmentLoader = new SegmentLoader2(segments, (data) => console.log(data));
+let paceHistogram;
+let segmentLoader = new SegmentLoader2(segments, (data) => {
+	paceHistogram = new Histogram("pacePlot", data["all"]["efforts"]);
+});
