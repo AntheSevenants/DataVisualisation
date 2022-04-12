@@ -25,26 +25,31 @@ class Plot {
 		}
 	}
 
-	initToolbar() {
+	initToolbar(type="play") {
 		this.toolbar = this.originalTargetElement.append("div")
 										 .attr("class", "toolbar");
 
 		this.toolbar = new Toolbar(this.toolbar);
 
-		this.toolbar.registerButton("play",
+		switch (type) {
+			case "play":
+				this.toolbar.registerButton("play",
 									Constants.playIcon,
 									"",
 									() => { this.togglePlayPause(); });
 
-		this.toolbar.registerButton("stop",
-									Constants.stopIcon,
-									"",
-									() => { this.playing = false;
-											this.resetAnimation(); });
-
-		this.toolbar.registerButton("coords",
-									"COORDS",
-									"",
-									() => { this.getCoords(); });
+				this.toolbar.registerButton("stop",
+											Constants.stopIcon,
+											"",
+											() => { this.playing = false;
+													this.resetAnimation(); });
+		
+				this.toolbar.registerButton("coords",
+											"COORDS",
+											"",
+											() => { this.getCoords(); });
+				break;
+		}
+		
 	}
 }
