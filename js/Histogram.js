@@ -19,6 +19,8 @@ class Histogram extends ClassicPlot {
 	initPlot() {
 		super.initPlot();
 
+		this.originalSvg = this.svg;
+
 		this.dimensions["height"] = 400;
 		this.chartRangeHeight = this.dimensions["height"] - this.dimensions["padding"];
 
@@ -55,11 +57,14 @@ class Histogram extends ClassicPlot {
 		this.toolbar.registerSlider("slider",
 							[0.01, 1, 0.01],
 							1,
-							(event) => { console.log(event.target.value); });
+							(event) => { this.affirmativeActionFunction = value => value * event.target.value;
+										 this.drawPlot(); });
 	}
 
 	drawPlot() {
-		this.svg = this.svg.append("g")
+		this.originalSvg.html("");
+
+		this.svg = this.originalSvg.append("g")
       					   .attr("transform", `translate(${this.dimensions["padding"]}, 0)`);
 
       	this.svg.append("g")
