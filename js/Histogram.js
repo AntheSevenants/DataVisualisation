@@ -3,7 +3,8 @@ class Histogram extends ClassicPlot {
 		super(targetElementName, "Histogram", false);
 
 		this.centralColumn = "pace";
-		this.affirmativeActionFunction = value => value;
+		this.affirmativeActionVariable = 1;
+		this.affirmativeActionFunction = value => value * this.affirmativeActionVariable;
 
 		this.padding = 40;
 		this.data = data.filter(row => +row["pace"] > 30 && +row["pace"] < 800);
@@ -11,7 +12,8 @@ class Histogram extends ClassicPlot {
 		//this.paces = data;
 
 		this.histogramStyles = [ { "fill": "#69b3a2", "name": "Men" },
-								 { "fill": "#404080", "name": "Women" } ];
+								 { "fill": "#404080", "name": "Women" },
+								 { "fill": "#434C5E", "name": "Women*" } ];
 		this.initPlot();
 		this.drawPlot();
 	}
@@ -57,7 +59,7 @@ class Histogram extends ClassicPlot {
 		this.toolbar.registerSlider("slider",
 							[0.01, 1, 0.01],
 							1,
-							(event) => { this.affirmativeActionFunction = value => value * event.target.value;
+							(event) => { this.affirmativeActionVariable = event.target.value;
 										 this.drawPlot(); });
 	}
 
@@ -84,14 +86,25 @@ class Histogram extends ClassicPlot {
 
   		// And apply this function to data to get the bins
   		this.bins = [ this.histogram(this.data.filter(d => d["athlete_gender"] == "M")),
-  			 		  this.histogram(this.data.filter(d => d["athlete_gender"] == "F")) ];
+  			 		  this.histogram(this.data.filter(d => d["athlete_gender"] == "F")),
+  			 		  // Female "shadow" gender will be used for original values
+  			 		  this.histogram(this.data.filter(d => d["athlete_gender"] == "F")
+  			 		  						  .map(d => { let copy = Object.assign({}, d);
+  			 		  						  			  copy["athlete_gender"] = "FF";
+  			 		  						  			  return copy; })) ];
 
       	this.scaleY.domain([0, d3.max(this.bins[0], (d) => d.length)]);   // d3.hist has to be called before the Y axis obviously
 
       	this.svg.append("g")
       			.call(d3.axisLeft(this.scaleY));
 
+      	let noShadowBins = (this.affirmativeActionVariable == 1);
+
       	this.bins.forEach((bin, index) => {
+      		if (index == 2 && noShadowBins) {
+      			return;
+      		}
+
 			// append the bar rectangles to the svg element
 			this.svg.selectAll(`rect${index}`)
 			    	.data(bin)
@@ -103,11 +116,15 @@ class Histogram extends ClassicPlot {
 			    							return width < 0 ? 0 : width; })
 			    	.attr("height", (d) => { return this.chartRangeHeight - this.scaleY(d.length); })
 			    	.style("fill", this.histogramStyles[index]["fill"])
-			    	.style("opacity", 0.6);
+			    	.style("opacity", !(index == 2) ? 0.6 : 0.1);
 		    });
 
       	// Handmade legend
       	this.bins.forEach((bin, index) => {
+      		if (index == 2 && noShadowBins) {
+      			return;
+      		}
+
 	  		this.svg.append("circle")
 	  				.attr("cx", this.dimensions["width"] - 150)
 	  				.attr("cy",30 * (index + 1))
