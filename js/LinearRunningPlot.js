@@ -1,4 +1,4 @@
-class LinearRunningPlot extends Plot {
+class LinearRunningPlot extends ClassicPlot {
 	constructor(targetElementName, length, efforts, toolbar=false, multiplier=1) {
 		super(targetElementName, "Plot LinearRunningPlot", toolbar);
 
@@ -35,14 +35,7 @@ class LinearRunningPlot extends Plot {
 	}
 
 	initPlot() {
-		this.dimensions = { "width": parseInt(this.container.style('width'), 10),
-							"height": parseInt(this.container.style('height'), 10),
-							"padding": 30 };
-
-		this.chartRange = this.dimensions["width"] - this.dimensions["padding"];
-
-		// Add a vector element
-		this.svg = this.targetElement.append("svg");
+		super.initPlot();
 
 		// Create a scaler
 		this.scaler = d3.scaleLinear()
