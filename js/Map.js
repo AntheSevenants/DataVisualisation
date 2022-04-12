@@ -1,4 +1,4 @@
-class Map extends Plot {
+class Map extends ClassicPlot {
 	constructor(targetElementName, coordinates, polyCoords=null, toolbar=false) {
 		super(targetElementName, "Map", toolbar);
 
