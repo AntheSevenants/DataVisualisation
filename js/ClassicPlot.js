@@ -5,6 +5,10 @@ class ClassicPlot extends Plot {
 	}
 
 	initPlot() {
+		if (!this.noToolbar) {
+			this.initToolbar();
+		}
+
 		this.dimensions = { "width": parseInt(this.container.style('width'), 10),
 							"height": parseInt(this.container.style('height'), 10),
 							"padding": this.padding };

@@ -20,9 +20,7 @@ class Plot {
 		this.originalTargetElement = this.targetElement;
 		this.targetElement = this.container;
 
-		if (!noToolbar) {
-			this.initToolbar();
-		}
+		this.noToolbar = noToolbar;
 	}
 
 	initToolbar() {

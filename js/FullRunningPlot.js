@@ -2,6 +2,8 @@ class FullRunningPlot extends Plot {
 	constructor(targetElementName, segment, efforts, multiplier) {
 		super(targetElementName, "FullRunningPlot", false, false);
 
+		this.initToolbar();
+
 		this.segment = segment;
 
 		// Title
