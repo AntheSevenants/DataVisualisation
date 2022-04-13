@@ -7,7 +7,14 @@ class Histogram extends ClassicPlot {
 		this.affirmativeActionFunction = value => value * this.affirmativeActionVariable;
 
 		this.padding = 40;
-		this.data = data.filter(row => +row["pace"] > 30 && +row["pace"] < 800);
+
+		// We copy all female data (faster than copying it on the fly each time)
+		this.data = data.concat(data.filter(d => d["athlete_gender"] == "F")
+  			 		  						  .map(d => { let copy = Object.assign({}, d);
+  			 		  						  			  copy["athlete_gender"] = "FF";
+  			 		  						  			  return copy; }))
+
+		this.data = this.data.filter(row => +row["pace"] > 30 && +row["pace"] < 800);
 		this.paces = this.data.map(row => +row["pace"]);
 		//this.paces = data;
 
@@ -88,10 +95,7 @@ class Histogram extends ClassicPlot {
   		this.bins = [ this.histogram(this.data.filter(d => d["athlete_gender"] == "M")),
   			 		  this.histogram(this.data.filter(d => d["athlete_gender"] == "F")),
   			 		  // Female "shadow" gender will be used for original values
-  			 		  this.histogram(this.data.filter(d => d["athlete_gender"] == "F")
-  			 		  						  .map(d => { let copy = Object.assign({}, d);
-  			 		  						  			  copy["athlete_gender"] = "FF";
-  			 		  						  			  return copy; })) ];
+  			 		  this.histogram(this.data.filter(d => d["athlete_gender"] == "FF")) ];
 
       	this.scaleY.domain([0, d3.max(this.bins[0], (d) => d.length)]);   // d3.hist has to be called before the Y axis obviously
 
