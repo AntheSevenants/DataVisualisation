@@ -16,6 +16,12 @@ class Toolbar {
 											   .on("click", onClickEvent);
 	}
 
+	registerText(name, default_value) {
+		this.elements[name] = this.targetElement.append("div")
+												.style("width", "3em")
+												.text(default_value);
+	}
+
 	registerSlider(name, range, default_value, onChangeEvent) {
 		this.elements[name] = this.targetElement.append("input")
 												.attr("type", "range")

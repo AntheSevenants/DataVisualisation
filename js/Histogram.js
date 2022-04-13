@@ -58,16 +58,21 @@ class Histogram extends ClassicPlot {
 
 	initToolbar() {
 		this.toolbar = this.originalTargetElement.append("div")
-										 .attr("class", "toolbar");
+										 .attr("class", "toolbar slider");
 
 		this.toolbar = new Toolbar(this.toolbar);
 
-
+		this.toolbar.registerText("multiplier", "x1");
 		this.toolbar.registerSlider("slider",
 							[0.01, 1, 0.01],
 							1,
 							(event) => { this.affirmativeActionVariable = event.target.value;
+										 this.toolbar.elements["multiplier"].text(this.getAffirmativeActionVariableFormatted());
 										 this.drawPlot(); });
+	}
+
+	getAffirmativeActionVariableFormatted() {
+		return `x${this.affirmativeActionVariable}`;
 	}
 
 	drawPlot() {
