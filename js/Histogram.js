@@ -35,8 +35,8 @@ class Histogram extends ClassicPlot {
 		this.svg.attr("width", this.dimensions["width"])
 				.attr("height", this.dimensions["height"]);
 
-		let domain = [ this.secondsToDate(+Math.min(...this.paces)),
-					   this.secondsToDate(+Math.max(...this.paces)) ];
+		let domain = [ Helpers.secondsToDate(+Math.min(...this.paces)),
+					   Helpers.secondsToDate(+Math.max(...this.paces)) ];
 
 		/*let domain = [ (+Math.min(...this.paces)),
 					   (+Math.max(...this.paces)) ];*/
@@ -87,7 +87,7 @@ class Histogram extends ClassicPlot {
       					   				   if (d["athlete_gender"] == "F") {
       					   				   	value = this.affirmativeAction.valueFunction(value);
       					   				   }
-      					   				return this.secondsToDate(value); })   // I need to give the vector of value
+      					   				return Helpers.secondsToDate(value); })   // I need to give the vector of value
       					   .domain(this.scaleX.domain())  // then the domain of the graphic
       					   .thresholds(this.scaleX.ticks(20)); // then the numbers of bins
 
@@ -143,12 +143,5 @@ class Histogram extends ClassicPlot {
   					.attr("alignment-baseline","middle")
   		});
 
-	}
-
-	secondsToDate(seconds) {
-		// Create a timezone-free epoch
-		let date = new Date(Date.UTC(1970, 0, 1, 0, 0, seconds));
-    	//date.setUTCSeconds(seconds);
-    	return date;
 	}
 }
