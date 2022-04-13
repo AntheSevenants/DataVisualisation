@@ -7,7 +7,10 @@ class Constants {
 		return {
 			"multiplier": new MultiplierAffirmativeAction([0.01, 1, 0.01],
 														  1,
-														  () => {})
+														  () => {}),
+			"constant": new ConstantAffirmativeAction([0, 120, 1],
+													  0,
+													  () => {})
 		}
 	}
 }
