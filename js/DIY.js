@@ -11,7 +11,11 @@ let segments = [ "10804677",
 				 "8687556",
 				 "900905" ]
 
+let multiplierAffirmativeAction = new MultiplierAffirmativeAction([0.01, 1, 0.01],
+														1,
+														() => {});
+
 let paceHistogram;
 let segmentLoader = new SegmentLoader2(segments, (data) => {
-	paceHistogram = new Histogram("pacePlot", data["all"]["efforts"]);
+	paceHistogram = new Histogram("pacePlot", data["all"]["efforts"], multiplierAffirmativeAction);
 });

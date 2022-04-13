@@ -1,10 +1,9 @@
 class Histogram extends ClassicPlot {
-	constructor(targetElementName, data) {
+	constructor(targetElementName, data, affirmativeAction) {
 		super(targetElementName, "Histogram", false);
 
 		this.centralColumn = "pace";
-		this.affirmativeActionVariable = 1;
-		this.affirmativeActionFunction = value => value * this.affirmativeActionVariable;
+		this.affirmativeAction = affirmativeAction;
 
 		this.padding = 40;
 
@@ -62,17 +61,13 @@ class Histogram extends ClassicPlot {
 
 		this.toolbar = new Toolbar(this.toolbar);
 
-		this.toolbar.registerText("multiplier", "x1");
+		this.toolbar.registerText("multiplier", this.affirmativeAction.formatFunction());
 		this.toolbar.registerSlider("slider",
-							[0.01, 1, 0.01],
-							1,
-							(event) => { this.affirmativeActionVariable = event.target.value;
-										 this.toolbar.elements["multiplier"].text(this.getAffirmativeActionVariableFormatted());
+							this.affirmativeAction.range,
+							this.affirmativeAction.defaultValue,
+							(event) => { this.affirmativeAction.variable = event.target.value;
+										 this.toolbar.elements["multiplier"].text(this.affirmativeAction.formatFunction());
 										 this.drawPlot(); });
-	}
-
-	getAffirmativeActionVariableFormatted() {
-		return `x${this.affirmativeActionVariable}`;
 	}
 
 	drawPlot() {
@@ -90,7 +85,7 @@ class Histogram extends ClassicPlot {
   		this.histogram = d3.histogram()
       					   .value((d) => { let value = +d[this.centralColumn];
       					   				   if (d["athlete_gender"] == "F") {
-      					   				   	value = this.affirmativeActionFunction(value);
+      					   				   	value = this.affirmativeAction.valueFunction(value);
       					   				   }
       					   				return this.secondsToDate(value); })   // I need to give the vector of value
       					   .domain(this.scaleX.domain())  // then the domain of the graphic
