@@ -12,5 +12,7 @@ class AffirmativeAction {
 
 		this.defaultValue = defaultValue;
 		this.range = range;
+
+		this.reverseSlider = false;
 	}
 }

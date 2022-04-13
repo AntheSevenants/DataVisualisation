@@ -67,7 +67,8 @@ class Histogram extends ClassicPlot {
 							this.affirmativeAction.defaultValue,
 							(event) => { this.affirmativeAction.variable = event.target.value;
 										 this.toolbar.elements["multiplier"].text(this.affirmativeAction.formatFunction());
-										 this.drawPlot(); });
+										 this.drawPlot(); },
+							this.affirmativeAction.reverseSlider);
 	}
 
 	drawPlot() {
@@ -102,7 +103,7 @@ class Histogram extends ClassicPlot {
       	this.svg.append("g")
       			.call(d3.axisLeft(this.scaleY));
 
-      	let noShadowBins = (this.affirmativeActionVariable == 1);
+      	let noShadowBins = (this.affirmativeAction.variable == this.affirmativeAction.defaultValue);
 
       	this.bins.forEach((bin, index) => {
       		if (index == 2 && noShadowBins) {

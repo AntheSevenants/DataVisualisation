@@ -22,13 +22,14 @@ class Toolbar {
 												.text(default_value);
 	}
 
-	registerSlider(name, range, default_value, onChangeEvent) {
+	registerSlider(name, range, default_value, onChangeEvent, reverseSlider=false) {
 		this.elements[name] = this.targetElement.append("input")
 												.attr("type", "range")
 												.attr("min", range[0].toString())
 												.attr("max", range[1].toString())
 												.attr("step", range[2].toString())
 												.attr("value", default_value)
+												.style("direction", reverseSlider ? "rtl" : "ltr")
 												.on("change", onChangeEvent);
 	}
 }
