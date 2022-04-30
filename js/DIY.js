@@ -11,7 +11,13 @@ let segments = [ "10804677",
 				 "8687556",
 				 "900905" ]
 
+function getCurrentAffirmativeActionOption() {
+	return d3.select("#affirmativeActionOptions").node().value;
+}
+
 let paceHistogram;
 let segmentLoader = new SegmentLoader2(segments, (data) => {
-	paceHistogram = new Histogram("pacePlot", data["all"]["efforts"], Constants.affirmativeActions["multiplier"]);
+	paceHistogram = new Histogram("pacePlot",
+								  data["all"]["efforts"],
+								  Constants.affirmativeActions[getCurrentAffirmativeActionOption()]);
 });
