@@ -2,7 +2,7 @@ class Histogram extends ClassicPlot {
 	constructor(targetElementName, data, affirmativeAction) {
 		super(targetElementName, "Histogram", false);
 
-		this.centralColumn = "pace";
+		this.centralColumn = "activity_pace";
 		this.affirmativeAction = affirmativeAction;
 
 		this.padding = 40;
@@ -13,8 +13,8 @@ class Histogram extends ClassicPlot {
   			 		  						  			  copy["athlete_gender"] = "FF";
   			 		  						  			  return copy; }))
 
-		this.data = this.data.filter(row => +row["pace"] > 30 && +row["pace"] < 800);
-		this.paces = this.data.map(row => +row["pace"]);
+		this.data = this.data.filter(row => +row["activity_pace"] > 30 && +row["activity_pace"] < 800);
+		this.paces = this.data.map(row => +row["activity_pace"]);
 		//this.paces = data;
 
 		this.histogramStyles = [ { "fill": "#69b3a2", "name": "Men" },
