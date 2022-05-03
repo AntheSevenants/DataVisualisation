@@ -2,6 +2,8 @@ class MapPlot extends ClassicPlot {
 	constructor(targetElementName, coordinates, polyCoords=null, toolbar=false) {
 		super(targetElementName, "Map", toolbar);
 
+		this.container.style("max-width", "100%");
+
 		// Initialise the map
 		this.map = L.map(this.targetElementName, { "zoomControl": false })
 					.setView(coordinates, 18);
