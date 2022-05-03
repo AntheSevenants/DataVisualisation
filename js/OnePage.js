@@ -17,7 +17,9 @@ Promise.all(files).then((promiseData) => {
 					   	   segment,
 					   	   data.slice(0, 20));
 
-	new CheckboxGenerator("ageGroupPicker",
+	new CheckboxHistogram("chartAgeGroupHistogram",
+						  "ageGroupPicker",
 						  Constants.ageCategories,
-						  [ "Men", "Women" ]);
+						  Constants.genders,
+						  data);
 });

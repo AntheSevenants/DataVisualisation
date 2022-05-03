@@ -23,4 +23,9 @@ class Constants {
 				 "55-64": "55_64",
 				 "65-69": "65_69" }
 	}
+
+	static get genders () {
+		return { "Men": "M",
+				 "Women": "F" }
+	}
 }
