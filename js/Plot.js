@@ -2,6 +2,7 @@ class Plot {
 	constructor(targetElementName, plotType, noToolbar=false, noContainer=false) {
 		// Find the target element in the DOM
 		this.targetElement = d3.select(`#${targetElementName}`);
+		this.targetElement.html("");
 		this.targetElement.attr("class", `${plotType}`);
 
 		console.log(targetElementName, "notoolbar:", noToolbar);
@@ -33,7 +34,7 @@ class Plot {
 					Constants.playIcon,
 					"btn btn-primary",
 					() => { this.togglePlayPause(); });
-		
+
 		this.toolbar.registerButton("stop",
 							Constants.stopIcon,
 							"btn btn-danger",
