@@ -16,4 +16,8 @@ Promise.all(files).then((promiseData) => {
 						   "leaderboardOriginal",
 					   	   segment,
 					   	   data.slice(0, 20));
+
+	new CheckboxGenerator("ageGroupPicker",
+						  Constants.ageCategories,
+						  [ "Men", "Women" ]);
 });

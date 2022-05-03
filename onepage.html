@@ -172,10 +172,14 @@
                 <div class="row">
                     <h3 class="display-8 fw-bold lh-7 mb-1">Age groups</h3>
                 </div>
-                <div class="row mt-4 mb-4">
-                    <div class="col">
-                        <img src="http://placekitten.com/600/400">
+                <div class="row justify-content-center">
+                    <div class="btn-toolbar mb-3 mt-3 justify-content-between" role="toolbar" aria-label="Toolbar with button groups" id="ageGroupPicker">
                     </div>
+                    <div class="col">
+                        <div id="chartAgeGroupHistogram"></div>
+                    </div>
+                </div>
+                <div class="row mt-4 mb-4">
                     <div class="col">
                         <img src="http://placekitten.com/400/400">
                         vroom vroom here
@@ -205,6 +209,7 @@
                 </footer>
             </div>
             <script src="js/Constants.js"></script>
+            <script src="js/CheckboxGenerator.js"></script>
             <script src="js/Helpers.js"></script>
             <script src="js/LatLongInterpolator.js"></script>
             <script src="js/PolylineDecoder.js"></script>
