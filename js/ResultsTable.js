@@ -16,8 +16,9 @@ class ResultsTable {
 		let dataTableRows = this.efforts.map((effort, index) => 
 			([ index + 1,
 			   d3.timeFormat("%M:%S")(Helpers.secondsToDate(+effort["time"])) ]));
+		let dataTableGender = this.efforts.map((effort, index) => effort["gender"]);
 
-		console.log(dataTableRows);
+		console.log(dataTableGender);
 
 		// Add the table to the target element
 		this.table = this.targetElement.append("table")
@@ -38,12 +39,12 @@ class ResultsTable {
 							 .selectAll("tr")
 							 .data(dataTableRows)
 							 .enter()
-							 .append("tr");
+							 .append("tr")
+							 .classed("female", (values, index) => dataTableGender[index] == "F");
 
 		// Fill the rows with data
 		rows.selectAll("td")
-			.data((value, index) => { console.log(value, index); return value; })
-			.classed("female", row => row["gender"] == "F")
+			.data((value, index) => { return value; })
 			.enter()
 			.append("td")
 			.classed("bold", (value, index) => index == 0)
