@@ -36,7 +36,7 @@ class Plot {
 		
 		this.toolbar.registerButton("stop",
 							Constants.stopIcon,
-							"btn btn-primary",
+							"btn btn-secondary",
 							() => { this.playing = false;
 									this.resetAnimation(); });
 	}
