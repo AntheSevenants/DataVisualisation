@@ -5,6 +5,8 @@ Promise.all(files).then((promiseData) => {
 	let data = promiseData[0];
 	let segment = promiseData[1];
 
+	data.sort((a,b) => +a["time"] - +b["time"]);
+
 	new Histogram("chartOriginalHistogram",
 				  data,
 				  new DummyAffirmativeAction(),
@@ -13,5 +15,5 @@ Promise.all(files).then((promiseData) => {
 	new NewFullRunningPlot("chartGeoRunningOriginal",
 						   "leaderboardOriginal",
 					   	   segment,
-					   	   data.slice(0, 25));
+					   	   data.slice(0, 20));
 });
