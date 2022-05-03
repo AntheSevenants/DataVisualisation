@@ -63,9 +63,9 @@ class GeoRunningPlot extends MapPlot {
 			this.stop();
 		}
 
-		/*this.toolbar.buttons["play"].text(this.playing ?
+		this.toolbar.buttons["play"].html(this.playing ?
 										  Constants.pauseIcon :
-										  Constants.playIcon);*/
+										  Constants.playIcon);
 	}
 
 	togglePlayPause() {

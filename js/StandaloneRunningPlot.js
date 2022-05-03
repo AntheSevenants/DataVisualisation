@@ -4,16 +4,16 @@ class StandaloneRunningPlot extends GeoRunningPlot {
 		this.initToolbar();
 	}
 
-	initToolbar() {
+	/*initToolbar() {
 		this.toolbar.registerButton("play",
 							Constants.playIcon,
-							"",
+							"btn btn-primary",
 							() => { this.togglePlayPause(); });
 
 		this.toolbar.registerButton("stop",
 									Constants.stopIcon,
-									"",
+									"btn btn-primary",
 									() => { this.playing = false;
 											this.resetAnimation(); });
-	}
+	}*/
 }

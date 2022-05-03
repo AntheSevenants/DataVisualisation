@@ -1,7 +1,7 @@
 class Constants {
-	static get playIcon () { return "▶"; }
-	static get pauseIcon () { return "❚❚"; }
-	static get stopIcon () { return "⏹"; }
+	static get playIcon () { return '<i class="bi bi-play-fill"></i>'; }
+	static get pauseIcon () { return '<i class="bi bi-pause-fill"></i>'; }
+	static get stopIcon () { return '<i class="bi bi-stop-fill"></i>'; }
 
 	static get affirmativeActions () {
 		return {

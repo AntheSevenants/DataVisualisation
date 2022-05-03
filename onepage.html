@@ -24,7 +24,7 @@
             <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
             integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
             crossorigin=""></script>
-        <script src="lib/AnimatedMarker.js"></script>
+            <script src="lib/AnimatedMarker.js"></script>
         </head>
         <body>
             <div class="container col-xxl-8 px-4 py-5">
@@ -135,10 +135,14 @@
                     </div>
                 </div>
             </div>
-            <div class="map-container">
-                <div id="chartGeoRunningOriginal">
+            <div class="row no-gutters map-with-leaderboard">
+                <div class="col">
+                    <div class="map-container">
+                        <div id="chartGeoRunningOriginal"></div>
+                    </div>
                 </div>
-                <div class="toolbar" id="chartGeoRunningOriginalToolbar"></div>
+                <div class="col col-lg-2 leaderboard" id="leaderboardOriginal">
+                </div>
             </div>
             <div class="container">
                 <div class="row mt-4 mb-4">
@@ -194,33 +198,33 @@
                 <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
                     <div class="col-md-4 d-flex align-items-center">
                         <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
-                        <i class="bi bi-bar-chart-fill"></i>
-                    </a>
-                    <span class="text-muted">Data Visualisation 2022 - Group 2</span>
-                </div>
-            </footer>
-        </div>
-        <script src="js/Constants.js"></script>
-        <script src="js/Helpers.js"></script>
-        <script src="js/LatLongInterpolator.js"></script>
-        <script src="js/PolylineDecoder.js"></script>
-        <script src="js/AffirmativeAction.js"></script>
-        <script src="js/DummyAffirmativeAction.js"></script>
-        <script src="js/Toolbar.js"></script>
-        <script src="js/Plot.js"></script>
-        <script src="js/ClassicPlot.js"></script>
-        <script src="js/BarChart.js"></script>
-        <script src="js/Histogram.js"></script>
-        <script src="js/Map.js"></script>
-        <script src="js/GeoRunningPlot.js"></script>
-        <script src="js/StandaloneRunningPlot.js"></script>
-        <script src="js/OnePage.js"></script>
-
-
-        <link type="text/css" rel="stylesheet" href="css/LinearRunningPlot.css"></style>
-        <link type="text/css" rel="stylesheet" href="css/LinearRunningPlotTable.css"></style>
-        <link type="text/css" rel="stylesheet" href="css/FullRunningPlot.css"></style>
-        <link type="text/css" rel="stylesheet" href="css/ResultsTable.css"></style>
-        <link type="text/css" rel="stylesheet" href="css/Map.css"></style>
-    </body>
-</html>
+                            <i class="bi bi-bar-chart-fill"></i>
+                        </a>
+                        <span class="text-muted">Data Visualisation 2022 - Group 2</span>
+                    </div>
+                </footer>
+            </div>
+            <script src="js/Constants.js"></script>
+            <script src="js/Helpers.js"></script>
+            <script src="js/LatLongInterpolator.js"></script>
+            <script src="js/PolylineDecoder.js"></script>
+            <script src="js/AffirmativeAction.js"></script>
+            <script src="js/DummyAffirmativeAction.js"></script>
+            <script src="js/Toolbar.js"></script>
+            <script src="js/Plot.js"></script>
+            <script src="js/ClassicPlot.js"></script>
+            <script src="js/BarChart.js"></script>
+            <script src="js/Histogram.js"></script>
+            <script src="js/ResultsTable.js"></script>
+            <script src="js/Map.js"></script>
+            <script src="js/GeoRunningPlot.js"></script>
+            <script src="js/StandaloneRunningPlot.js"></script>
+            <script src="js/NewFullRunningPlot.js"></script>
+            <script src="js/OnePage.js"></script>
+            <link type="text/css" rel="stylesheet" href="css/LinearRunningPlot.css"></style>
+            <link type="text/css" rel="stylesheet" href="css/LinearRunningPlotTable.css"></style>
+            <link type="text/css" rel="stylesheet" href="css/FullRunningPlot.css"></style>
+            <link type="text/css" rel="stylesheet" href="css/ResultsTable.css"></style>
+            <link type="text/css" rel="stylesheet" href="css/Map.css"></style>
+        </body>
+    </html>

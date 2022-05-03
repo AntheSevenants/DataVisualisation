@@ -30,19 +30,14 @@ class Plot {
 		this.toolbar = new Toolbar(this.toolbar);
 
 		this.toolbar.registerButton("play",
-							Constants.playIcon,
-							"",
-							() => { this.togglePlayPause(); });
-
-		this.toolbar.registerButton("stop",
-									Constants.stopIcon,
-									"",
-									() => { this.playing = false;
-											this.resetAnimation(); });
+					Constants.playIcon,
+					"btn btn-primary",
+					() => { this.togglePlayPause(); });
 		
-		this.toolbar.registerButton("coords",
-									"COORDS",
-									"",
-									() => { this.getCoords(); });
+		this.toolbar.registerButton("stop",
+							Constants.stopIcon,
+							"btn btn-primary",
+							() => { this.playing = false;
+									this.resetAnimation(); });
 	}
 }

@@ -11,7 +11,7 @@ class Toolbar {
 
 		this.buttons[name] = this.targetElement.append("button")
 											   .attr("id", name)
-											   .text(content)
+											   .html(content)
 											   .attr("class", className)
 											   .on("click", onClickEvent);
 	}

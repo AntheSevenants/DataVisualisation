@@ -12,9 +12,6 @@ class ResultsTable {
 	initTable() {
 		console.log(this.targetElement);
 
-		// Set the correct table class
-		this.targetElement.attr("class", "Table ResultsTable");
-
 		let dataTableColumns = [ "#", "Time" ];
 		let dataTableRows = this.efforts.map((effort, index) => 
 			([ index + 1, `${effort["time"]}s` ]));
@@ -22,7 +19,8 @@ class ResultsTable {
 		console.log(dataTableRows);
 
 		// Add the table to the target element
-		this.table = this.targetElement.append("table");
+		this.table = this.targetElement.append("table")
+									   .attr("class", "table");
 
 		// Prepare the headings
 		this.table.append("thead")
@@ -31,6 +29,7 @@ class ResultsTable {
 				  .data(dataTableColumns)
 				  .enter()
 				  .append("th")
+				  .attr("scope", "col")
 				  .text(column => column);
 
 		// Create the necessary table row for each entry
@@ -42,9 +41,11 @@ class ResultsTable {
 
 		// Fill the rows with data
 		rows.selectAll("td")
-			.data(value => { console.log(value); return value; })
+			.data((value, index) => { console.log(value, index); return value; })
+			.classed("female", row => row["gender"] == "F")
 			.enter()
 			.append("td")
+			.classed("bold", (value, index) => index == 0)
 			//.attr("data-th", row => row["name"])
 			.text(row => row);
 	}
