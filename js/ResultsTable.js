@@ -14,7 +14,8 @@ class ResultsTable {
 
 		let dataTableColumns = [ "#", "Time" ];
 		let dataTableRows = this.efforts.map((effort, index) => 
-			([ index + 1, `${effort["time"]}s` ]));
+			([ index + 1,
+			   d3.timeFormat("%M:%S")(Helpers.secondsToDate(+effort["time"])) ]));
 
 		console.log(dataTableRows);
 
@@ -47,6 +48,6 @@ class ResultsTable {
 			.append("td")
 			.classed("bold", (value, index) => index == 0)
 			//.attr("data-th", row => row["name"])
-			.text(row => row);
+			.text(value => value);
 	}
 }
