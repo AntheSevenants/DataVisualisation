@@ -19,7 +19,7 @@ class MapPlot extends ClassicPlot {
 			this.setPolyline(polyCoords);
 		}
 
-		//this.disableMapFunctions();
+		this.disableMapFunctions();
 	}
 
 	setPolyline(latlngs, color="#FD661E") {
