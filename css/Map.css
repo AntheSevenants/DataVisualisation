@@ -1,3 +1,28 @@
 .Map .container, .Map {
 	height: 640px;
+	position: relative;
+}
+
+.Map * {
+	z-index: 0;
+}
+
+.map-container {
+	width: 100%;
+	position: relative;
+}
+
+.map-container .toolbar {
+	position: absolute;
+	background-color: #ffffff;
+	width: auto;
+
+	border-radius: 50%;
+
+	padding: 5px;
+
+	bottom: 15px;
+    left: 50%;
+
+    transform: translateX(-50%);
 }

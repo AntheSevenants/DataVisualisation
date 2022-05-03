@@ -10,9 +10,9 @@ Promise.all(files).then((promiseData) => {
 				  new DummyAffirmativeAction(),
 				  true);
 
-	new GeoRunningPlot("chartGeoRunningOriginal",
+	new StandaloneRunningPlot("chartGeoRunningOriginal",
 					   segment,
 					   data.slice(0, 10),
-					   false,
+					   new Toolbar(d3.select("#chartGeoRunningOriginalToolbar")),
 					   1);
 });
