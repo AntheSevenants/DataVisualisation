@@ -1,4 +1,4 @@
-class GeoRunningPlot extends Map {
+class GeoRunningPlot extends MapPlot {
 	constructor(targetElementName, segment, efforts, toolbar, multiplier=1) {
 		// Decode polyline from segment
 		let polyCoords = PolylineDecoder.decode(segment["polyline"]);
