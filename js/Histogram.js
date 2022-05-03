@@ -1,20 +1,20 @@
 class Histogram extends ClassicPlot {
-	constructor(targetElementName, data, affirmativeAction) {
-		super(targetElementName, "Histogram", false);
+	constructor(targetElementName, data, affirmativeAction, noToolbar=false) {
+		super(targetElementName, "Histogram", noToolbar);
 
-		this.centralColumn = "activity_pace";
+		this.centralColumn = "time";
 		this.affirmativeAction = affirmativeAction;
 
 		this.padding = 40;
 
 		// We copy all female data (faster than copying it on the fly each time)
-		this.data = data.concat(data.filter(d => d["athlete_gender"] == "F")
+		this.data = data.concat(data.filter(d => d["gender"] == "F")
   			 		  						  .map(d => { let copy = Object.assign({}, d);
-  			 		  						  			  copy["athlete_gender"] = "FF";
+  			 		  						  			  copy["gender"] = "FF";
   			 		  						  			  return copy; }))
 
-		this.data = this.data.filter(row => +row["activity_pace"] > 30 && +row["activity_pace"] < 800);
-		this.paces = this.data.map(row => +row["activity_pace"]);
+		this.data = this.data.filter(row => +row["time"] > 30 && +row["time"] < 800);
+		this.paces = this.data.map(row => +row["time"]);
 		//this.paces = data;
 
 		this.histogramStyles = [ { "fill": "#69b3a2", "name": "Men" },
@@ -85,7 +85,7 @@ class Histogram extends ClassicPlot {
   		// set the parameters for the histogram
   		this.histogram = d3.histogram()
       					   .value((d) => { let value = +d[this.centralColumn];
-      					   				   if (d["athlete_gender"] == "F") {
+      					   				   if (d["gender"] == "F") {
       					   				   	value = this.affirmativeAction.valueFunction(value);
       					   				   }
       					   				return Helpers.secondsToDate(value); })   // I need to give the vector of value
@@ -93,10 +93,10 @@ class Histogram extends ClassicPlot {
       					   .thresholds(this.scaleX.ticks(20)); // then the numbers of bins
 
   		// And apply this function to data to get the bins
-  		this.bins = [ this.histogram(this.data.filter(d => d["athlete_gender"] == "M")),
-  			 		  this.histogram(this.data.filter(d => d["athlete_gender"] == "F")),
+  		this.bins = [ this.histogram(this.data.filter(d => d["gender"] == "M")),
+  			 		  this.histogram(this.data.filter(d => d["gender"] == "F")),
   			 		  // Female "shadow" gender will be used for original values
-  			 		  this.histogram(this.data.filter(d => d["athlete_gender"] == "FF")) ];
+  			 		  this.histogram(this.data.filter(d => d["gender"] == "FF")) ];
 
       	this.scaleY.domain([0, d3.max(this.bins[0], (d) => d.length)]);   // d3.hist has to be called before the Y axis obviously
 
