@@ -7,7 +7,7 @@ Promise.all(files).then((promiseData) => {
 
 	data.sort((a,b) => +a["time"] - +b["time"]);
 
-	new Histogram("chartOriginalHistogram",
+	new DensityPlot("chartOriginalHistogram",
 				  data,
 				  new DummyAffirmativeAction(),
 				  true);
