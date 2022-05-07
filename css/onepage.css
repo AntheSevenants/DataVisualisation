@@ -53,3 +53,13 @@
 p.offset {
   padding-right: 1em;
 }
+
+.toolbar input[type="range"] {
+  width: 100%;
+}
+
+.toolbar.slider {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

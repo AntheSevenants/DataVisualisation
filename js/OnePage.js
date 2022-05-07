@@ -30,4 +30,11 @@ Promise.all(files).then((promiseData) => {
 													"distribution": 75 },
 										   "women": { "display": "Women",
 										   			  "distribution": 25 } });
+
+	new DensityPlot("chartAffirmativeActionHistogram",
+					data,
+					new ConstantAffirmativeAction([0, 120, 1],
+												 0,
+												 () => {}),
+					false);
 });
