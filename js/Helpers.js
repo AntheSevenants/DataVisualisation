@@ -9,4 +9,8 @@ class Helpers {
     	//date.setUTCSeconds(seconds);
     	return date;
 	}
+
+	static timeSort(a,b) {
+		return +a["time"] - +b["time"]
+	}
 }

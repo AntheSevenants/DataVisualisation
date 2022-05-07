@@ -5,7 +5,7 @@ Promise.all(files).then((promiseData) => {
 	let data = promiseData[0];
 	let segment = promiseData[1];
 
-	data.sort((a,b) => +a["time"] - +b["time"]);
+	data.sort(Helpers.timeSort);
 
 	new DensityPlot("chartOriginalHistogram",
 				  data,
@@ -30,11 +30,4 @@ Promise.all(files).then((promiseData) => {
 													"distribution": 75 },
 										   "women": { "display": "Women",
 										   			  "distribution": 25 } });
-
-	new DensityPlot("chartAffirmativeActionHistogram",
-					data,
-					new ConstantAffirmativeAction([0, 120, 1],
-												 0,
-												 () => {}),
-					false);
 });
