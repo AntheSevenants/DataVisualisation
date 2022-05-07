@@ -14,7 +14,7 @@ function kernelEpanechnikov(k) {
 }
 
 class DensityPlot extends ClassicPlot {
-	constructor(targetElementName, data, affirmativeAction, noToolbar=false, maxY=null, ticks=60) {
+	constructor(targetElementName, data, affirmativeAction, noToolbar=false, maxY=null, ticks=40) {
 		super(targetElementName, "Histogram", noToolbar);
 
 		this.centralColumn = "time";
@@ -45,6 +45,8 @@ class DensityPlot extends ClassicPlot {
 		super.initPlot();
 
 		this.originalSvg = this.svg;
+
+		this.curves = [];
 
 		this.dimensions["height"] = 400;
 		this.chartRangeHeight = this.dimensions["height"] - this.dimensions["padding"];
@@ -79,8 +81,22 @@ class DensityPlot extends ClassicPlot {
 							this.affirmativeAction.defaultValue,
 							(event) => { this.affirmativeAction.variable = event.target.value;
 										 this.toolbar.elements["multiplier"].text(this.affirmativeAction.formatFunction());
-										 this.drawPlot(); },
+										 this.updatePlot(); },
 							this.affirmativeAction.reverseSlider);
+	}
+
+	updatePlot() {
+  		// Create the kdes
+  		this.densities[1] = this.kde(this.data.filter(d => d["gender"] == "F")
+  			 		   	   					 .map(d => (this.affirmativeAction.valueFunction(+d["time"]))));
+
+  		this.curves[1].datum(this.densities[1])
+  					  .transition()
+					  .duration(300)
+			    	  .attr("d", d3.line()
+			    				 .curve(d3.curveBasis)
+			    				 .x(d => this.scaleX(d[0]))
+			    				 .y(d => this.scaleY(d[1])));
 	}
 
 	drawPlot() {
@@ -127,7 +143,7 @@ class DensityPlot extends ClassicPlot {
       		}
 
 			// append the densities to the svg element
-			this.svg.append("path")
+			let curve = this.svg.append("path")
 					.attr("class", "mypath")
 			    	.datum(density)
 			    	.attr("fill", this.histogramStyles[index]["fill"])
@@ -139,6 +155,8 @@ class DensityPlot extends ClassicPlot {
 			    				 .curve(d3.curveBasis)
 			    				 .x(d => this.scaleX(d[0]))
 			    				 .y(d => this.scaleY(d[1])));
+
+			this.curves.push(curve);
 		    });
 
       	// Handmade legend
