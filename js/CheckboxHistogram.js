@@ -15,6 +15,8 @@ class CheckboxHistogramMap {
 		this.mapElementName = mapElementName;
 		this.leaderboardElementName = leaderboardElementName;
 
+		this.densityPlot = null;
+
 		let onCheckboxChange = this.onCheckboxChange.bind(this);
 
 		let checkboxGenerator = new CheckboxGenerator(checkboxElementName,
@@ -37,12 +39,17 @@ class CheckboxHistogramMap {
 
 		let slicedData = filteredData.slice(0, 20);
 
-		new DensityPlot(this.targetElementName,
-				      filteredData,
-				      new DummyAffirmativeAction(),
-				      true,
-				      0.003,
-				      45);
+		if (this.densityPlot == null) {
+			this.densityPlot = new DensityPlot(this.targetElementName,
+					     					   filteredData,
+					     					   new DummyAffirmativeAction(),
+					     					   true,
+					     					   0.003,
+					     					   45);
+		} else {
+			this.densityPlot.initData(filteredData);
+			this.densityPlot.updatePlot();
+		}
 
 		new StandaloneRunningPlot(this.mapElementName,
 								  this.segment,

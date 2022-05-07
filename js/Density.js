@@ -2,7 +2,6 @@
 function kernelDensityEstimator(kernel, X) {
   return function(V) {
     return X.map(function(x) {
-    	console.log(x, d3.mean(V, function(v) { return kernel(x - v); }));
       return [x, d3.mean(V, function(v) { return kernel(x - v); })];
     });
   };
@@ -23,7 +22,17 @@ class DensityPlot extends ClassicPlot {
 		this.padding = 40;
 		this.maxY = maxY;
 		this.ticks = ticks;
+		
+		this.initData(data);
 
+		this.histogramStyles = [ { "fill": "#69b3a2", "name": "Men", "column": "M" },
+								 { "fill": "#404080", "name": "Women", "column": "F" },
+								 { "fill": "#434C5E", "name": "Women*", "column": "FF" } ];
+		this.initPlot();
+		this.drawPlot();
+	}
+
+	initData(data) {
 		// We copy all female data (faster than copying it on the fly each time)
 		this.data = data.concat(data.filter(d => d["gender"] == "F")
   			 		  						  .map(d => { let copy = Object.assign({}, d);
@@ -31,14 +40,6 @@ class DensityPlot extends ClassicPlot {
   			 		  						  			  return copy; }))
 
 		this.data = this.data.filter(row => +row["time"] > 30 && +row["time"] < 800);
-		this.paces = this.data.map(row => +row["time"]);
-		//this.paces = data;
-
-		this.histogramStyles = [ { "fill": "#69b3a2", "name": "Men", "column": "M" },
-								 { "fill": "#404080", "name": "Women", "column": "F" },
-								 { "fill": "#434C5E", "name": "Women*", "column": "FF" } ];
-		this.initPlot();
-		this.drawPlot();
 	}
 
 	initPlot() {
@@ -85,18 +86,30 @@ class DensityPlot extends ClassicPlot {
 							this.affirmativeAction.reverseSlider);
 	}
 
-	updatePlot() {
-  		// Create the kdes
-  		this.densities[1] = this.kde(this.data.filter(d => d["gender"] == "F")
-  			 		   	   					 .map(d => (this.affirmativeAction.valueFunction(+d["time"]))));
+	defineDensities() {
+  		// Create the kdes (which can change)
+		this.densities[0] = this.kde(this.data.filter(d => d["gender"] == "M")
+  											  .map(d => (+d["time"])));
+		this.densities[1] = this.kde(this.data.filter(d => d["gender"] == "F")
+  			 		   	   					  .map(d => (this.affirmativeAction.valueFunction(+d["time"]))));
+	}
 
-  		this.curves[1].datum(this.densities[1])
-  					  .transition()
-					  .duration(300)
-			    	  .attr("d", d3.line()
-			    				 .curve(d3.curveBasis)
-			    				 .x(d => this.scaleX(d[0]))
-			    				 .y(d => this.scaleY(d[1])));
+	updatePlot() {
+  		this.defineDensities();
+
+  		this.curves.forEach((curve, index) => {
+  			if (index == 2) {
+  				return;
+  			}
+
+  			curve.datum(this.densities[index])
+  				 .transition()
+				 .duration(300)
+			     .attr("d", d3.line()
+			     			  .curve(d3.curveBasis)
+			     			  .x(d => this.scaleX(d[0]))
+			     			  .y(d => this.scaleY(d[1])));
+  		});
 	}
 
 	drawPlot() {
@@ -124,14 +137,12 @@ class DensityPlot extends ClassicPlot {
       	console.log(this.data.filter(d => d["gender"] == "M")
   											 .map(d => (+d["time"])));
 
+      	// Female "shadow" gender will be used for original values
+		this.densities = [ null, null, this.kde(this.data.filter(d => d["gender"] == "FF")
+  			 		   	   					 			 .map(d => (+d["time"]))) ];
+
   		// Create the kdes
-  		this.densities = [ this.kde(this.data.filter(d => d["gender"] == "M")
-  											 .map(d => (+d["time"]))),
-  			 		   	   this.kde(this.data.filter(d => d["gender"] == "F")
-  			 		   	   					 .map(d => (this.affirmativeAction.valueFunction(+d["time"])))),
-  			 		   	   // Female "shadow" gender will be used for original values
-  			 		   	   this.kde(this.data.filter(d => d["gender"] == "FF")
-  			 		   	   					 .map(d => (+d["time"]))) ];
+  		this.defineDensities();
 
   		console.log(this.densities);
 
