@@ -17,11 +17,14 @@ Promise.all(files).then((promiseData) => {
 					   	   segment,
 					   	   data.slice(0, 20));
 
-	new CheckboxHistogram("chartAgeGroupHistogram",
-						  "ageGroupPicker",
-						  Constants.ageCategories,
-						  Constants.genders,
-						  data);
+	new CheckboxHistogramMap("chartAgeGroupHistogram",
+							 "ageGroupPicker",
+							 "chartGeoRunningAgeGroups",
+							 "leaderboardAgeGroups",
+							 Constants.ageCategories,
+							 Constants.genders,
+							 segment,
+							 data);
 
 	new SplitEstimator("splitEstimator", { "men": { "display": "Men",
 													"distribution": 75 },

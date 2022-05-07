@@ -25,7 +25,7 @@ class MapPlot extends ClassicPlot {
 	setPolyline(latlngs, color="#FD661E") {
 		this.polyline = L.polyline(latlngs, {color: color});
 		this.polyline.addTo(this.map);
-		this.map.fitBounds(this.polyline.getBounds());
+		this.map.fitBounds(this.polyline.getBounds(), { animate: false });
 	}
 
 	disableMapFunctions() {

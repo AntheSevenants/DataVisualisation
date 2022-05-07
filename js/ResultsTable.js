@@ -3,6 +3,8 @@ class ResultsTable {
 		// Find the target element in the DOM
 		this.targetElement = d3.select(`#${targetElementName}`);
 
+		this.targetElement.html("");
+
 		// Arary for efforts for this segment
 		this.efforts = efforts;
 
