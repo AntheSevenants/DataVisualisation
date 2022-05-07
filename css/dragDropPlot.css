@@ -1,0 +1,58 @@
+.DragDropPlot {
+	width: 100%;
+	height: 600px;
+
+	background-color: #eee;
+}
+
+.DragDropPlot .goals {
+
+}
+
+.DragDropPlot .category {
+	background-size: cover;
+	background-position: center;
+
+	padding:  1em;
+
+	display: flex;
+	justify-content: end;
+	flex-direction: column-reverse;
+
+	/*border: 1px solid #eee;*/
+}
+
+.category.Men .goal.Men, .category.Women .goal.Women {
+	background-color: #B2F1D7;
+}
+.category.Men .goal.Men::before, .category.Women .goal.Women::before {
+	content: "✓";
+}
+
+.category.Men .goal.Women, .category.Women .goal.Men {
+	background-color: #e57f7f;
+}
+
+.category.Men .goal.Women::before, .category.Women .goal.Men::before {
+	content: "✗";
+}
+
+.goal {
+	display: inline-block;
+
+ 	background: gainsboro;
+ 	box-sizing: border-box;
+
+ 	width: 140px;
+ 	height: 50px;
+ 	padding: 15px 25px;
+
+ 	border-radius: 5px;
+
+ 	margin-bottom: 5px;
+ 	margin-right: 5px;
+
+ 	text-align: center;
+
+ 	cursor: grab;  
+}

@@ -36,4 +36,10 @@ Promise.all(files).then((promiseData) => {
 													"distribution": 75 },
 										   "women": { "display": "Women",
 										   			  "distribution": 25 } });
+
+	new DragDropPlot("dragDropPlot", "dragDropGoals",
+					 [ "enjoyment", "competence", "vitality",
+					   "fitness", "social", "appearance" ],
+					 { "Men": [ "vitality", "appearance", "social" ] ,
+					   "Women": [ "competence", "enjoyment", "fitness" ] });
 });
