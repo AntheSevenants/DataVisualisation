@@ -18,7 +18,7 @@ class Toolbar {
 
 	registerText(name, default_value) {
 		this.elements[name] = this.targetElement.append("div")
-												.style("width", "3em")
+												.style("width", "5em")
 												.text(default_value);
 	}
 
