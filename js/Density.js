@@ -33,6 +33,8 @@ class DensityPlot extends ClassicPlot {
 	}
 
 	initData(data) {
+		this.originalData = data;
+
 		// We copy all female data (faster than copying it on the fly each time)
 		this.data = data.concat(data.filter(d => d["gender"] == "F")
   			 		  						  .map(d => { let copy = Object.assign({}, d);
@@ -40,6 +42,16 @@ class DensityPlot extends ClassicPlot {
   			 		  						  			  return copy; }))
 
 		this.data = this.data.filter(row => +row["time"] > 30 && +row["time"] < 800);
+
+		this.menData = this.data.filter(d => d["gender"] == "M")
+  								.map(d => (+d["time"]));
+
+  		this.updateWomen();
+	}
+
+	updateWomen() {
+  		this.womenData = this.data.filter(d => d["gender"] == "F")
+  			 		   	   		  .map(d => (this.affirmativeAction.valueFunction(+d["time"])))
 	}
 
 	initPlot() {
@@ -82,16 +94,32 @@ class DensityPlot extends ClassicPlot {
 							this.affirmativeAction.defaultValue,
 							(event) => { this.affirmativeAction.variable = event.target.value;
 										 this.toolbar.elements["multiplier"].text(this.affirmativeAction.formatFunction());
-										 this.updatePlot(); },
+										 this.updateWomen();
+										 this.updatePlot();
+
+										 let boostedDataset = this.originalData.map(d => { 
+										 	// If not a women, we don't need to apply the value function
+										 	if (d["gender"] != "F") {
+										 		return d;
+										 	// If a women, create a deep copy, and apply value function
+										 	} else {
+										 		let copy = Object.assign({}, d);
+												copy["time"] = this.affirmativeAction.valueFunction(copy["time"]);
+  			 		  						  	return copy;
+										 	}
+										 });
+										 boostedDataset.sort(Helpers.timeSort);
+
+										 console.log(boostedDataset);
+
+										 this.affirmativeAction.callback(boostedDataset); },
 							this.affirmativeAction.reverseSlider);
 	}
 
 	defineDensities() {
   		// Create the kdes (which can change)
-		this.densities[0] = this.kde(this.data.filter(d => d["gender"] == "M")
-  											  .map(d => (+d["time"])));
-		this.densities[1] = this.kde(this.data.filter(d => d["gender"] == "F")
-  			 		   	   					  .map(d => (this.affirmativeAction.valueFunction(+d["time"]))));
+		this.densities[0] = this.kde(this.menData);
+		this.densities[1] = this.kde(this.womenData);
 	}
 
 	showHideShadowPlot() {

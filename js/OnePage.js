@@ -26,6 +26,12 @@ Promise.all(files).then((promiseData) => {
 							 segment,
 							 data);
 
+	new AffirmativeActionPlot("chartAffirmativeActionHistogram",
+							  "chartGeoRunningAffirmativeAction",
+							  "leaderboardAffirmativeAction",
+							  segment,
+							  data);
+
 	new SplitEstimator("splitEstimator", { "men": { "display": "Men",
 													"distribution": 75 },
 										   "women": { "display": "Women",
