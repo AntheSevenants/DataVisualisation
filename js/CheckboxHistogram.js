@@ -16,6 +16,7 @@ class CheckboxHistogramMap {
 		this.leaderboardElementName = leaderboardElementName;
 
 		this.densityPlot = null;
+		this.standaloneRunningPlot = null;
 
 		let onCheckboxChange = this.onCheckboxChange.bind(this);
 
@@ -51,10 +52,14 @@ class CheckboxHistogramMap {
 			this.densityPlot.updatePlot();
 		}
 
-		new StandaloneRunningPlot(this.mapElementName,
-								  this.segment,
-								  slicedData,
-								  toolbar);
+		if (this.standaloneRunningPlot == null) {
+			this.standaloneRunningPlot = new StandaloneRunningPlot(this.mapElementName,
+																   this.segment,
+																   slicedData,
+																   toolbar);
+		} else {
+			this.standaloneRunningPlot.initData(slicedData);
+		}
 
 		new ResultsTable(this.leaderboardElementName,
 						 slicedData);

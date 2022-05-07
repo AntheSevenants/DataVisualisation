@@ -12,18 +12,26 @@ class GeoRunningPlot extends MapPlot {
 		super(targetElementName, centreCoord, polyCoords, toolbar);
 
 		this.segment = segment;
-		this.efforts = efforts;
 
 		this.animatedMarkers = [];
-		this._playing = false;
 
 		if (toolbar) {
 			this.toolbar = toolbar;
 		}
 
-		this.resetAnimation();
+		this._playing = false;
 
+		this.initData(efforts, true);
+	}
+
+	initData(efforts, init=false) {
+		this.efforts = efforts;
+		this.resetAnimation();
 		this.ended = false;
+
+		if (!init) {
+			this.playing = false;
+		}
 	}
 
 	resetAnimation() {

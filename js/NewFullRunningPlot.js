@@ -3,7 +3,7 @@ class NewFullRunningPlot {
 		new StandaloneRunningPlot(runningPlotName,
 								  segment,
 								  efforts,
-								  toolbar);
+								  false);
 
 		new ResultsTable(leaderboardName,
 						 efforts);
