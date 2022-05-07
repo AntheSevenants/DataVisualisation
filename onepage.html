@@ -25,6 +25,8 @@
             integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
             crossorigin=""></script>
             <script src="lib/AnimatedMarker.js"></script>
+        <!-- Split.js -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/split.js/1.6.0/split.min.js"></script>
         </head>
         <body>
             <div class="container col-xxl-8 px-4 py-5">
@@ -198,7 +200,7 @@
                         quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo</p>
                     </div>
                     <div class="col-10 col-sm-8 col-lg-6">
-                        <img src="http://placekitten.com/400/400" class="d-block mx-lg-auto img-fluid" height="400" width="auto">
+                        <div id="splitEstimator" class=""></div>
                     </div>
                 </div>
             </div>
@@ -282,11 +284,13 @@
             <script src="js/GeoRunningPlot.js"></script>
             <script src="js/StandaloneRunningPlot.js"></script>
             <script src="js/NewFullRunningPlot.js"></script>
+            <script src="js/SplitEstimator.js"></script>
             <script src="js/OnePage.js"></script>
             <link type="text/css" rel="stylesheet" href="css/LinearRunningPlot.css"></style>
             <link type="text/css" rel="stylesheet" href="css/LinearRunningPlotTable.css"></style>
             <link type="text/css" rel="stylesheet" href="css/FullRunningPlot.css"></style>
             <link type="text/css" rel="stylesheet" href="css/ResultsTable.css"></style>
             <link type="text/css" rel="stylesheet" href="css/Map.css"></style>
+            <link type="text/css" rel="stylesheet" href="css/split.css"></style>
         </body>
     </html>

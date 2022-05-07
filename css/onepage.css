@@ -22,3 +22,34 @@
 .label-btn {
   pointer-events: none;
 }
+
+.estimator {
+  height: 200px;
+  width: 100%;
+}
+
+.innersplit {
+  background-color: green;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.innersplit .info {
+
+}
+
+.men {
+  background-color: #69b3a2;
+  color: #111;
+}
+
+.women {
+  background-color: #404080;
+  color: #ffffff;
+}
+
+p.offset {
+  padding-right: 1em;
+}

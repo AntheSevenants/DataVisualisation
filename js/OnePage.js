@@ -22,4 +22,9 @@ Promise.all(files).then((promiseData) => {
 						  Constants.ageCategories,
 						  Constants.genders,
 						  data);
+
+	new SplitEstimator("splitEstimator", { "men": { "display": "Men",
+													"distribution": 75 },
+										   "women": { "display": "Women",
+										   			  "distribution": 25 } });
 });
