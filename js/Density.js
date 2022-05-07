@@ -94,6 +94,12 @@ class DensityPlot extends ClassicPlot {
   			 		   	   					  .map(d => (this.affirmativeAction.valueFunction(+d["time"]))));
 	}
 
+	showHideShadowPlot() {
+		let noShadowBins = (this.affirmativeAction.variable == this.affirmativeAction.defaultValue);
+
+		this.curves[2].style("display", noShadowBins ? "hidden": "inline");
+	}
+
 	updatePlot() {
   		this.defineDensities();
 
@@ -110,6 +116,8 @@ class DensityPlot extends ClassicPlot {
 			     			  .x(d => this.scaleX(d[0]))
 			     			  .y(d => this.scaleY(d[1])));
   		});
+
+  		this.showHideShadowPlot();
 	}
 
 	drawPlot() {
@@ -144,15 +152,7 @@ class DensityPlot extends ClassicPlot {
   		// Create the kdes
   		this.defineDensities();
 
-  		console.log(this.densities);
-
-      	let noShadowBins = (this.affirmativeAction.variable == this.affirmativeAction.defaultValue);
-
       	this.densities.forEach((density, index) => {
-      		if (index == 2 && noShadowBins) {
-      			return;
-      		}
-
 			// append the densities to the svg element
 			let curve = this.svg.append("path")
 					.attr("class", "mypath")
@@ -170,11 +170,13 @@ class DensityPlot extends ClassicPlot {
 			this.curves.push(curve);
 		    });
 
+      	this.showHideShadowPlot();
+
       	// Handmade legend
       	this.densities.forEach((bin, index) => {
-      		if (index == 2 && noShadowBins) {
+      		/*if (index == 2 && noShadowBins) {
       			return;
-      		}
+      		}*/
 
 	  		this.svg.append("circle")
 	  				.attr("cx", this.dimensions["width"] - 150)
@@ -189,6 +191,5 @@ class DensityPlot extends ClassicPlot {
   					.style("font-size", "15px")
   					.attr("alignment-baseline","middle")
   		});
-
 	}
 }
