@@ -2,6 +2,7 @@
 function kernelDensityEstimator(kernel, X) {
   return function(V) {
     return X.map(function(x) {
+    	console.log(x, d3.mean(V, function(v) { return kernel(x - v); }));
       return [x, d3.mean(V, function(v) { return kernel(x - v); })];
     });
   };
@@ -51,15 +52,10 @@ class DensityPlot extends ClassicPlot {
 		this.svg.attr("width", this.dimensions["width"])
 				.attr("height", this.dimensions["height"]);
 
-		let domain = [ Helpers.secondsToDate(30),
-					   Helpers.secondsToDate(800) ];
+		let domain = [ 30,
+					   800 ];
 
-
-
-		/*let domain = [ 30,
-					   800 ];*/
-
-		this.scaleX = d3.scaleTime()
+		this.scaleX = d3.scaleLinear()
   						.domain(domain).nice()
     					.range([ 0, 
     						     this.chartRange - 20 ]);
@@ -98,11 +94,12 @@ class DensityPlot extends ClassicPlot {
       	this.svg.append("g")
       			.attr("transform", `translate(0, ${this.chartRangeHeight})`)
       			.call(d3.axisBottom(this.scaleX)
-      					.tickFormat(d3.timeFormat("%M:%S")));
+      					.tickValues(d3.range(60, 800, 60))
+      					.tickFormat((secs, i) => d3.timeFormat("%M:%S")(Helpers.secondsToDate(secs))));
 
       	// Y axis
       	this.scaleY.domain([0,
-      						this.maxY == null ? 0.0012 : this.maxY])
+      						this.maxY == null ? 0.01 : 0.015])
       			   .nice();
 
       	this.svg.append("g")
@@ -113,12 +110,12 @@ class DensityPlot extends ClassicPlot {
 
   		// Create the kdes
   		this.densities = [ this.kde(this.data.filter(d => d["gender"] == "M")
-  											 .map(d => Helpers.secondsToDate(+d["time"]))),
+  											 .map(d => (+d["time"]))),
   			 		   	   this.kde(this.data.filter(d => d["gender"] == "F")
-  			 		   	   					 .map(d => Helpers.secondsToDate(this.affirmativeAction.valueFunction(+d["time"])))),
+  			 		   	   					 .map(d => (this.affirmativeAction.valueFunction(+d["time"])))),
   			 		   	   // Female "shadow" gender will be used for original values
   			 		   	   this.kde(this.data.filter(d => d["gender"] == "FF")
-  			 		   	   					 .map(d => Helpers.secondsToDate(+d["time"]))) ];
+  			 		   	   					 .map(d => (+d["time"]))) ];
 
   		console.log(this.densities);
 
