@@ -122,10 +122,13 @@ class DensityPlot extends ClassicPlot {
 		this.densities[1] = this.kde(this.womenData);
 	}
 
-	showHideShadowPlot() {
-		let noShadowBins = (this.affirmativeAction.variable == this.affirmativeAction.defaultValue);
+	get noShadowBins() {
+		return (this.affirmativeAction.variable == this.affirmativeAction.defaultValue);
+	}
 
-		this.curves[2].style("display", noShadowBins ? "none": "inline");
+	showHideShadowPlot() {
+		this.curves[2].style("display", this.noShadowBins ? "none": "inline");
+      	this.drawLegend();
 	}
 
 	updatePlot() {
@@ -199,17 +202,25 @@ class DensityPlot extends ClassicPlot {
 		    });
 
       	this.showHideShadowPlot();
+	}
+
+	drawLegend() {
+		// Remove pre-existing legend things
+		console.log(this.svg.selectAll(".legend_piece"));
+		this.svg.selectAll(".legend_piece").remove();
 
       	// Handmade legend
       	this.densities.forEach((bin, index) => {
-      		/*if (index == 2 && noShadowBins) {
+      		if (index == 2 && this.noShadowBins) {
       			return;
-      		}*/
+      		}
 
 	  		this.svg.append("circle")
 	  				.attr("cx", this.dimensions["width"] - 150)
 	  				.attr("cy",30 * (index + 1))
 	  				.attr("r", 6)
+	  				.attr("fill-opacity", !(index == 2) ? 0.6 : 0.1)
+	  				.attr("class", "legend_piece")
 	  				.style("fill", this.histogramStyles[index]["fill"])
   			
   			this.svg.append("text")
@@ -217,6 +228,7 @@ class DensityPlot extends ClassicPlot {
   					.attr("y", 30 * (index + 1))
   					.text(this.histogramStyles[index]["name"])
   					.style("font-size", "15px")
+	  				.attr("class", "legend_piece")
   					.attr("alignment-baseline","middle")
   		});
 	}
