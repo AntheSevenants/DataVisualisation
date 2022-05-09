@@ -26,7 +26,7 @@
 	background-color: #B2F1D7;
 }
 .category.Men .goal.Men::before, .category.Women .goal.Women::before {
-	content: "✓";
+	content: "👍 ";
 }
 
 .category.Men .goal.Women, .category.Women .goal.Men {
@@ -34,7 +34,7 @@
 }
 
 .category.Men .goal.Women::before, .category.Women .goal.Men::before {
-	content: "✗";
+	content: "👎 ";
 }
 
 .goal {
@@ -43,7 +43,7 @@
  	background: gainsboro;
  	box-sizing: border-box;
 
- 	width: 140px;
+ 	width: auto;
  	height: 50px;
  	padding: 15px 25px;
 
