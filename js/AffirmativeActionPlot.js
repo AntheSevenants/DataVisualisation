@@ -27,7 +27,9 @@ class AffirmativeActionPlot {
 	}
 
 	onSliderEnd(data) {
-		let slicedData = data.slice(0, 20);
+		let sample = Helpers.sample(data);
+		sample.sort(Helpers.timeSort);
+		let slicedData = sample.slice(0, 20);
 
 		if (this.standaloneRunningPlot == null) {
 			this.standaloneRunningPlot = new StandaloneRunningPlot(this.mapElementName,

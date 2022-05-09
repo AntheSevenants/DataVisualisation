@@ -12,10 +12,13 @@ Promise.all(files).then((promiseData) => {
 				  new DummyAffirmativeAction(),
 				  true);
 
+	let sample = Helpers.sample(data);
+	sample.sort(Helpers.timeSort);
+
 	new NewFullRunningPlot("chartGeoRunningOriginal",
 						   "leaderboardOriginal",
 					   	   segment,
-					   	   data.slice(0, 20));
+					   	   sample.slice(0, 20));
 
 	new CheckboxHistogramMap("chartAgeGroupHistogram",
 							 "ageGroupPicker",

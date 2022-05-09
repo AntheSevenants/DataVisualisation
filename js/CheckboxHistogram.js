@@ -38,7 +38,9 @@ class CheckboxHistogramMap {
 				return row["gender"] == gender && row["age_category"] == settings[gender]; }));
 			});
 
-		let slicedData = filteredData.slice(0, 20);
+		let sample = Helpers.sample(filteredData);
+		sample.sort(Helpers.timeSort);
+		let slicedData = sample.slice(0, 20);
 
 		if (this.densityPlot == null) {
 			this.densityPlot = new DensityPlot(this.targetElementName,
