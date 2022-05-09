@@ -125,7 +125,7 @@ class DensityPlot extends ClassicPlot {
 	showHideShadowPlot() {
 		let noShadowBins = (this.affirmativeAction.variable == this.affirmativeAction.defaultValue);
 
-		this.curves[2].style("display", noShadowBins ? "hidden": "inline");
+		this.curves[2].style("display", noShadowBins ? "none": "inline");
 	}
 
 	updatePlot() {
