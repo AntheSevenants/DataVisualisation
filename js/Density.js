@@ -25,9 +25,9 @@ class DensityPlot extends ClassicPlot {
 		
 		this.initData(data);
 
-		this.histogramStyles = [ { "fill": "#69b3a2", "name": "Men", "column": "M" },
-								 { "fill": "#404080", "name": "Women", "column": "F" },
-								 { "fill": "#434C5E", "name": "Women*", "column": "FF" } ];
+		this.histogramStyles = [ { "fill": Constants.colours["men"], "name": "Men", "column": "M" },
+								 { "fill": Constants.colours["women"], "name": "Women", "column": "F" },
+								 { "fill": Constants.colours["shadow"], "name": "Women*", "column": "FF" } ];
 		this.initPlot();
 		this.drawPlot();
 	}
