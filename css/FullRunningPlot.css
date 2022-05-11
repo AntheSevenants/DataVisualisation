@@ -7,12 +7,12 @@
 	margin-bottom: 15px;
 }
 
-.FullRunningPlot > .container {
+.FullRunningPlot > .plotcontainer {
 	display: flex;
 	justify-content: center;
 }
 
-.FullRunningPlot > .container > .inner {
+.FullRunningPlot > .plotcontainer > .inner {
 	width: calc(100% - 8em);
 }
 

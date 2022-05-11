@@ -1,4 +1,4 @@
-.Map .container, .Map {
+.Map .plotcontainer, .Map {
 	height: 640px;
 	position: relative;
 }

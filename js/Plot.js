@@ -15,7 +15,7 @@ class Plot {
 		this.targetElementName = `${targetElementName}-container`;
 
 		this.container = this.targetElement.append("div")
-										   .attr("class", "container")
+										   .attr("class", "plotcontainer")
 										   .attr("id", this.targetElementName);
 
 		this.originalTargetElement = this.targetElement;
