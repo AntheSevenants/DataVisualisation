@@ -216,7 +216,7 @@ class DensityPlot extends ClassicPlot {
       		}
 
 	  		this.svg.append("circle")
-	  				.attr("cx", this.dimensions["width"] - 130)
+	  				.attr("cx", this.dimensions["width"] - 100)
 	  				.attr("cy",30 * (index + 1))
 	  				.attr("r", 6)
 	  				.attr("fill-opacity", !(index == 2) ? 0.6 : 0.1)
@@ -224,7 +224,7 @@ class DensityPlot extends ClassicPlot {
 	  				.style("fill", this.histogramStyles[index]["fill"])
   			
   			this.svg.append("text")
-  					.attr("x", this.dimensions["width"] - 150)
+  					.attr("x", this.dimensions["width"] - 120)
   					.attr("y", 30 * (index + 1))
   					.text(this.histogramStyles[index]["name"])
   					.style("font-size", "15px")

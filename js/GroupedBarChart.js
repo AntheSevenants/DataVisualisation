@@ -92,7 +92,7 @@ class GroupedBarChart extends ClassicPlot {
       	// Handmade legend
       	this.subgroups.forEach((subgroup, index) => {
 	  		this.svg.append("circle")
-	  				.attr("cx", this.dimensions["width"] - 150)
+	  				.attr("cx", this.dimensions["width"] - 70)
 	  				.attr("cy",30 * (index + 1))
 	  				.attr("r", 6)
 	  				.attr("fill-opacity", 0.6)
@@ -100,12 +100,13 @@ class GroupedBarChart extends ClassicPlot {
 	  				.style("fill", this.colour(subgroup));
   			
   			this.svg.append("text")
-  					.attr("x", this.dimensions["width"] - 130)
+  					.attr("x", this.dimensions["width"] - 90)
   					.attr("y", 30 * (index + 1))
   					.text(subgroup)
   					.style("font-size", "15px")
 	  				.attr("class", "legend_piece")
-  					.attr("alignment-baseline","middle");
+  					.attr("alignment-baseline","middle")
+  					.attr("text-anchor", "end");
   		});
 	}
 }
