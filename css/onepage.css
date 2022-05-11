@@ -10,8 +10,13 @@
   font-weight: bold;
 }
 
+.male {
+  background-color: #656FBA;
+  color: #ffffff;
+}
+
 .female {
-  background-color: #f6d6d6;
+  background-color: #F7F2A3;
 }
 
 .leaderboard {

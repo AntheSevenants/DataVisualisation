@@ -42,7 +42,8 @@ class ResultsTable {
 							 .data(dataTableRows)
 							 .enter()
 							 .append("tr")
-							 .classed("female", (values, index) => dataTableGender[index] == "F");
+							 .classed("female", (values, index) => dataTableGender[index] == "F")
+							 .classed("male", (values, index) => dataTableGender[index] == "M");
 
 		// Fill the rows with data
 		rows.selectAll("td")
