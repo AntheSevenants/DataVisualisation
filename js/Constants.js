@@ -31,6 +31,7 @@ class Constants {
 
 	static get colours () {
 		return { "men": "#00108d",
-				 "women": "#f2ea66" };
+				 "women": "#f2ea66",
+				 "shadow": "#434C5E" };
 	}
 }
