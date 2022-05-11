@@ -21,7 +21,7 @@ class GroupedBarChart extends ClassicPlot {
 
 		this.originalSvg = this.svg;
 
-		this.dimensions["padding"] = 50;
+		this.dimensions["padding"] = 60;
 		this.dimensions["height"] = 400;
 		this.chartRangeHeight = this.dimensions["height"] - this.dimensions["padding"] * 2;
 
@@ -30,7 +30,7 @@ class GroupedBarChart extends ClassicPlot {
 
 		this.svg = this.svg.append("g")
 						   .attr("transform",
-					  		`translate(${this.dimensions['padding']}, 10)`);
+					  		`translate(20, 10)`);
 
 		this.scaleX = d3.scaleBand()
 				  .domain(this.groups)
@@ -48,7 +48,7 @@ class GroupedBarChart extends ClassicPlot {
 
   		this.colour = d3.scaleOrdinal()
   						.domain(this.subgroups)
-  						.range(['#e41a1c','#377eb8']);
+  						.range(Object.values(Constants.colours));
 	}
 
 	drawPlot() {
@@ -85,7 +85,11 @@ class GroupedBarChart extends ClassicPlot {
       			.attr("y", d => this.scaleY(d["value"]))
       			.attr("width", this.scaleXsub.bandwidth())
       			.attr("height", d => this.chartRangeHeight - this.scaleY(d["value"]))
-      			.attr("fill", d => this.colour(d["key"]));
+      			.attr("fill", d => this.colour(d["key"]))
+			    .attr("opacity", 0.6)
+			    .attr("stroke", "#000")
+      			.attr("stroke-width", 1)
+      			.attr("stroke-linejoin", "round");
 	}
 
 	drawLegend() {
@@ -93,7 +97,7 @@ class GroupedBarChart extends ClassicPlot {
       	this.subgroups.forEach((subgroup, index) => {
 	  		this.svg.append("circle")
 	  				.attr("cx", this.dimensions["width"] - 70)
-	  				.attr("cy",30 * (index + 1))
+	  				.attr("cy",30 * (index))
 	  				.attr("r", 6)
 	  				.attr("fill-opacity", 0.6)
 	  				.attr("class", "legend_piece")
@@ -101,7 +105,7 @@ class GroupedBarChart extends ClassicPlot {
   			
   			this.svg.append("text")
   					.attr("x", this.dimensions["width"] - 90)
-  					.attr("y", 30 * (index + 1))
+  					.attr("y", 30 * (index))
   					.text(subgroup)
   					.style("font-size", "15px")
 	  				.attr("class", "legend_piece")
