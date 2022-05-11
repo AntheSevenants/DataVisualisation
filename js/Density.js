@@ -27,7 +27,7 @@ class DensityPlot extends ClassicPlot {
 
 		this.histogramStyles = [ { "fill": Constants.colours["men"], "name": "Men", "column": "M" },
 								 { "fill": Constants.colours["women"], "name": "Women", "column": "F" },
-								 { "fill": Constants.colours["shadow"], "name": "Women*", "column": "FF" } ];
+								 { "fill": Constants.colours["shadow"], "name": "Women without boost", "column": "FF" } ];
 		this.initPlot();
 		this.drawPlot();
 	}
@@ -216,7 +216,7 @@ class DensityPlot extends ClassicPlot {
       		}
 
 	  		this.svg.append("circle")
-	  				.attr("cx", this.dimensions["width"] - 150)
+	  				.attr("cx", this.dimensions["width"] - 130)
 	  				.attr("cy",30 * (index + 1))
 	  				.attr("r", 6)
 	  				.attr("fill-opacity", !(index == 2) ? 0.6 : 0.1)
@@ -224,12 +224,13 @@ class DensityPlot extends ClassicPlot {
 	  				.style("fill", this.histogramStyles[index]["fill"])
   			
   			this.svg.append("text")
-  					.attr("x", this.dimensions["width"] - 130)
+  					.attr("x", this.dimensions["width"] - 150)
   					.attr("y", 30 * (index + 1))
   					.text(this.histogramStyles[index]["name"])
   					.style("font-size", "15px")
 	  				.attr("class", "legend_piece")
   					.attr("alignment-baseline","middle")
+  					.attr("text-anchor", "end")
   		});
 	}
 }
