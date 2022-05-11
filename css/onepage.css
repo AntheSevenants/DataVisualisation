@@ -10,12 +10,12 @@
   font-weight: bold;
 }
 
-.male {
+.male, .men {
   background-color: #656FBA;
   color: #ffffff;
 }
 
-.female {
+.female, .women {
   background-color: #F7F2A3;
 }
 
@@ -34,8 +34,6 @@
 }
 
 .innersplit {
-  background-color: green;
-
   display: flex;
   justify-content: center;
   align-items: center;
@@ -45,7 +43,7 @@
 
 }
 
-.men {
+/*.men {
   background-color: #69b3a2;
   color: #111;
 }
@@ -53,7 +51,7 @@
 .women {
   background-color: #404080;
   color: #ffffff;
-}
+}*/
 
 p.offset {
   padding-right: 1em;
