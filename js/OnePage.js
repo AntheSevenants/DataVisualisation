@@ -26,6 +26,11 @@ Promise.all(files).then((promiseData) => {
 					   	   segment,
 					   	   sample.slice(0, 20));
 
+	new NewFullRunningPlot("chartGeoRunningOriginalRepeat",
+						   "leaderboardOriginalRepeat",
+					   	   segment,
+					   	   sample.slice(0, 20));
+
 	new CheckboxHistogramMap("chartAgeGroupHistogram",
 							 "ageGroupPicker",
 							 "chartGeoRunningAgeGroups",
