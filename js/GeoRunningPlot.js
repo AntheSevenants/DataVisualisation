@@ -13,6 +13,8 @@ class GeoRunningPlot extends MapPlot {
 
 		this.segment = segment;
 
+		this.conversion = { "M": "men", "F": "women" };
+
 		this.animatedMarkers = [];
 
 		if (toolbar) {
@@ -42,8 +44,8 @@ class GeoRunningPlot extends MapPlot {
 											  			  { autoStart: false,
 											  			  	zIndexOffset: Helpers.zIndexFromIndex(index),
 											  			    distance: this.segment["distance"],
-											  			    icon: L.icon({ iconUrl: `minimap/${index}.png`,
-											  			    			   iconSize: 32 }),
+											  			    icon: L.icon({ iconUrl: `minimap/${this.conversion[effort["gender"]]}.png`,
+											  			    			   iconSize: 8 }),
 											  			    interval: effort["time"] * 1000,
 											  			    onEnd: () => { this.ended = true;
 											  			    			   if (index == 0) {
