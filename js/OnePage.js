@@ -1,9 +1,15 @@
 files = [ d3.csv("data/strava-leaderboard-segment_finse_piste_heverlee.csv"),
-		  d3.json("data/segment_900905.json") ];
+		  d3.json("data/segment_900905.json") ,
+		  d3.csv("data/timeofday.csv"),
+		  d3.csv("data/weekday.csv"),
+		  d3.csv("data/temperature.csv") ];
 
 Promise.all(files).then((promiseData) => {
 	let data = promiseData[0];
 	let segment = promiseData[1];
+	let timeOfDayData = promiseData[2];
+	let weekdayData = promiseData[3];
+	let temperatureData = promiseData[4];
 
 	data.sort(Helpers.timeSort);
 
@@ -45,4 +51,13 @@ Promise.all(files).then((promiseData) => {
 					   "fitness", "social", "appearance" ],
 					 { "Men": [ "vitality", "appearance", "social" ] ,
 					   "Women": [ "competence", "enjoyment", "fitness" ] });
+
+	new GroupedBarChart("chartTimeOfDayPlot",
+						timeOfDayData, true);
+
+	new GroupedBarChart("chartWeekdayPlot",
+						weekdayData);
+
+	new GroupedBarChart("chartTemperatureBarPlot",
+						temperatureData, true);
 });

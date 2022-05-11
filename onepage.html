@@ -76,11 +76,24 @@
             </div>
             <div class="container col-xxl-8 px-4 py-5">
                 <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+                    <div class="col-lg-6">
+                        <h3 class="display-8 fw-bold lh-7 mb-1">Men and women run on the same days</h3>
+                        <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo</p>
+                    </div>
                     <div class="col-10 col-sm-8 col-lg-6">
-                        <img src="http://placekitten.com/400/400" class="d-block mx-lg-auto img-fluid" height="400" width="auto">
+                        <div id="chartWeekdayPlot"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="container col-xxl-8 px-4 py-5">
+                <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+                    <div class="col-10 col-sm-8 col-lg-6">
+                        <div id="chartTimeOfDayPlot"></div>
                     </div>
                     <div class="col-lg-6">
-                        <h3 class="display-8 fw-bold lh-7 mb-1">Weather conditions</h3>
+                        <h3 class="display-8 fw-bold lh-7 mb-1">Men and women run at the same times</h3>
                         <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                             tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
                         quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo</p>
@@ -88,25 +101,12 @@
                 </div>
             </div>
             <div class="container col-xxl-8 px-4 py-5">
-                <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
-                    <div class="col-lg-6">
-                        <h3 class="display-8 fw-bold lh-7 mb-1">Weekdays</h3>
-                        <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo</p>
-                    </div>
+                <div class="row align-items-center g-5 py-5">
                     <div class="col-10 col-sm-8 col-lg-6">
-                        <img src="http://placekitten.com/400/400" class="d-block mx-lg-auto img-fluid" height="400" width="auto">
-                    </div>
-                </div>
-            </div>
-            <div class="container col-xxl-8 px-4 py-5">
-                <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
-                    <div class="col-10 col-sm-8 col-lg-6">
-                        <img src="http://placekitten.com/400/400" class="d-block mx-lg-auto img-fluid" height="400" width="auto">
+                        <div id="chartTemperatureBarPlot"></div>
                     </div>
                     <div class="col-lg-6">
-                        <h3 class="display-8 fw-bold lh-7 mb-1">Safe hours</h3>
+                        <h3 class="display-8 fw-bold lh-7 mb-1">Men and women prefer the same weather</h3>
                         <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                             tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
                         quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo</p>
@@ -295,6 +295,7 @@
             <script src="js/Plot.js"></script>
             <script src="js/ClassicPlot.js"></script>
             <script src="js/BarChart.js"></script>
+            <script src="js/GroupedBarChart.js"></script>
             <script src="js/Histogram.js"></script>
             <script src="js/Density.js"></script>
             <script src="js/CheckboxHistogram.js"></script>

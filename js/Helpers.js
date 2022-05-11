@@ -43,4 +43,17 @@ class Helpers {
 
 		return sampledMen.concat(sampledWomen);
 	}
+
+	static insertLinebreaks(d) {
+    	var el = d3.select(this);
+    	var words = d.split('\\n');
+    	el.text('');
+	
+    	for (var i = 0; i < words.length; i++) {
+    	    var tspan = el.append('tspan').text(words[i]);
+    	    if (i > 0) {
+    	        tspan.attr('x', 0).attr('dy', '15');
+    	    }
+    	}
+	}
 }
