@@ -183,11 +183,14 @@ class DensityPlot extends ClassicPlot {
       					   .attr("transform", `translate(${this.dimensions["padding"]}, 10)`);
 
       	// X axis
-      	this.svg.append("g")
+      	let xAxis = this.svg.append("g")
       			.attr("transform", `translate(0, ${this.chartRangeHeight})`)
       			.call(d3.axisBottom(this.scaleX)
       					.tickValues(d3.range(60, 800, 60))
       					.tickFormat((secs, i) => d3.timeFormat("%M:%S")(Helpers.secondsToDate(secs))));
+  		
+  			xAxis.selectAll("text")
+  			 .attr("color", "#6b6b6b");
 
       	// text label for the x axis
   		this.svg.append("text")             
@@ -200,7 +203,6 @@ class DensityPlot extends ClassicPlot {
       	this.scaleY.domain([0,
       						this.maxY == null ? 0.01 : 0.014])
       			   .nice();
-
       	// text label for the y axis
       	this.svg.append("text")
       			.attr("transform", "rotate(-90)")
@@ -210,9 +212,13 @@ class DensityPlot extends ClassicPlot {
       			.style("text-anchor", "middle")
       			.text("density (higher means more entries)");   		   
 
-      	this.svg.append("g")
+      	let yAxis = this.svg.append("g")
       			.call(d3.axisLeft(this.scaleY)
       							.tickFormat(d3.format(".1%")));
+
+      	yAxis.selectAll("text")
+  					 .attr("color", "#6b6b6b");
+
 
       	console.log(this.data.filter(d => d["gender"] == "M")
   											 .map(d => (+d["time"])));

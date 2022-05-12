@@ -74,6 +74,7 @@ class GroupedBarChart extends ClassicPlot {
   		
   		xAxis.selectAll("text")
   			 .attr("transform", "translate(0, 5)")
+  			 .attr("color", "#6b6b6b")
     		 //.attr("transform", "translate(-10,0)") /* rotate(-45)*/
     		 .style("text-anchor", "middle");
 
@@ -85,9 +86,12 @@ class GroupedBarChart extends ClassicPlot {
       			.text(this.xTitle);
 
 		// Draw Y axis
-		this.svg.append("g")
+		let yAxis = this.svg.append("g")
   				.call(d3.axisLeft(this.scaleY)
   						.tickFormat(d => `${d}%`));
+
+  		yAxis.selectAll("text")
+  			 .attr("color", "#6b6b6b");
 
       	// text label for the y axis
       	this.originalSvg.append("text")
