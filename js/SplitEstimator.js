@@ -8,7 +8,7 @@ class SplitEstimator {
 
 		this.statusElement = this.originalTargetElement.append("p")
 											   		   .attr("class", "lead text-center mt-3")
-											   		   .html("Drag the gutter to estimate");
+											   		   .html("Drag the slider to estimate the division of premium memberships between sexes");
 
 		this.splitInfo = splitInfo;
 		this.percentageDivs = [];
@@ -61,7 +61,7 @@ class SplitEstimator {
 	}
 
 	onDragStart() {
-		this.statusElement.html("Release the gutter to check your guess");
+		this.statusElement.html("Release the slider to check your guess");
 	}
 
 	onDrag() {
