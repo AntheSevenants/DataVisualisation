@@ -167,7 +167,7 @@ class DensityPlot extends ClassicPlot {
 
       	// Y axis
       	this.scaleY.domain([0,
-      						this.maxY == null ? 0.01 : 0.015])
+      						this.maxY == null ? 0.01 : 0.014])
       			   .nice();
 
       	this.svg.append("g")
