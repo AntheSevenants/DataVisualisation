@@ -34,4 +34,11 @@ class Constants {
 				 "women": "#f2ea66",
 				 "shadow": "#434C5E" };
 	}
+
+	static get highlightWomen() {
+		return [ { "time": 254,
+  				   "id": "9084" }, 
+  				 { "time": 532,
+  				   "id": "10590" } ];
+	}
 }

@@ -48,11 +48,6 @@ class DensityPlot extends ClassicPlot {
 		this.menData = this.data.filter(d => d["gender"] == "M")
   								.map(d => (+d["time"]));
 
-  		this.highlightWomen = [ { "time": 254,
-  								  "id": "9084" }, 
-  								{ "time": 532,
-  								  "id": "10590" } ];
-
   		this.updateWomen();
 	}
 
@@ -137,7 +132,7 @@ class DensityPlot extends ClassicPlot {
 	showHideShadowPlot() {
 		this.curves[2].style("display", this.noShadowBins ? "none": "inline");
 
-		this.highlightWomen.forEach((highlightWoman, index) => {
+		Constants.highlightWomen.forEach((highlightWoman, index) => {
 				let showWoman = this.participantIds.includes(highlightWoman["id"]);
       			this.svg.select(`#highlightWomanLine_${index}`).style("display", showWoman ? "inline" : "none");
       			this.svg.select(`#highlightWomanCircle_${index}`).style("display", showWoman ? "inline" : "none");
@@ -163,7 +158,7 @@ class DensityPlot extends ClassicPlot {
 			     			  .y(d => this.scaleY(d[1])));
   		});
 
-  		this.highlightWomen.forEach((highlightWoman, index) => {
+  		Constants.highlightWomen.forEach((highlightWoman, index) => {
       			this.svg.select(`#highlightWomanLine_${index}`)
       					.transition()
       					.duration(300)
@@ -249,7 +244,7 @@ class DensityPlot extends ClassicPlot {
 
       	this.svg.append("defs")
 				.selectAll(null)
-		    	.data(this.highlightWomen)
+		    	.data(Constants.highlightWomen)
 		    	.enter()
 		    	.append("pattern")
 		    	.attr("id", (d, index) => `highlightwoman_${index}`)
@@ -270,7 +265,7 @@ class DensityPlot extends ClassicPlot {
 				.attr("class", "dot") 
 				.attr("transform", "translate(0, 0)");
 
-      	this.highlightWomen.forEach((highlightWoman, index) => {
+      	Constants.highlightWomen.forEach((highlightWoman, index) => {
       		lineLayer.append("line")
       			.attr("id", `highlightWomanLine_${index}`)
 				.attr("x1", this.scaleX(highlightWoman["time"]))  //<<== change your code here
