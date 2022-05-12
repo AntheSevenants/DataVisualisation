@@ -43,10 +43,15 @@ class DensityPlot extends ClassicPlot {
 
 		this.data = this.data.filter(row => +row["time"] > 30 && +row["time"] < 800);
 
+		this.participantIds = this.data.map(row => row["id"]);
+
 		this.menData = this.data.filter(d => d["gender"] == "M")
   								.map(d => (+d["time"]));
 
-  		this.highlightWomen = [ 254, 532 ];
+  		this.highlightWomen = [ { "time": 254,
+  								  "id": "9084" }, 
+  								{ "time": 532,
+  								  "id": "10590" } ];
 
   		this.updateWomen();
 	}
@@ -131,6 +136,13 @@ class DensityPlot extends ClassicPlot {
 
 	showHideShadowPlot() {
 		this.curves[2].style("display", this.noShadowBins ? "none": "inline");
+
+		this.highlightWomen.forEach((highlightWoman, index) => {
+				let showWoman = this.participantIds.includes(highlightWoman["id"]);
+      			this.svg.select(`#highlightWomanLine_${index}`).style("display", showWoman ? "inline" : "none");
+      			this.svg.select(`#highlightWomanCircle_${index}`).style("display", showWoman ? "inline" : "none");
+		});
+
       	this.drawLegend();
 	}
 
@@ -150,6 +162,20 @@ class DensityPlot extends ClassicPlot {
 			     			  .x(d => this.scaleX(d[0]))
 			     			  .y(d => this.scaleY(d[1])));
   		});
+
+  		this.highlightWomen.forEach((highlightWoman, index) => {
+      			this.svg.select(`#highlightWomanLine_${index}`)
+      					.transition()
+      					.duration(300)
+						.attr("x1", this.scaleX(this.affirmativeAction.valueFunction(highlightWoman["time"])))  //<<== change your code here
+						.attr("x2", this.scaleX(this.affirmativeAction.valueFunction(highlightWoman["time"])))  //<<== and here
+
+
+      			this.svg.select(`#highlightWomanCircle_${index}`)
+      					.transition()
+      					.duration(300)
+      					.attr("cx", this.scaleX(this.affirmativeAction.valueFunction(highlightWoman["time"])))
+		});
 
   		this.showHideShadowPlot();
 	}
@@ -221,16 +247,52 @@ class DensityPlot extends ClassicPlot {
 			this.curves.push(curve);
 		    });
 
-      	this.highlightWomen.forEach((time, index) => {
-      		this.svg.append("line")
-				.attr("x1", this.scaleX(time))  //<<== change your code here
+      	this.svg.append("defs")
+				.selectAll(null)
+		    	.data(this.highlightWomen)
+		    	.enter()
+		    	.append("pattern")
+		    	.attr("id", (d, index) => `highlightwoman_${index}`)
+		    	.attr("height", "100%")
+		    	.attr("width", "100%")
+		    	.attr("patternContentUnits", "objectBoundingBox")
+		    	.append("image")
+		    	.attr("height", 1)
+		    	.attr("width", 1)
+		    	.attr("preserveAspectRatio", "none")
+		    	.attr("xlink:href", (d, index) => `data/highlightwoman_${index}.jpg`);
+
+		let lineLayer = this.svg.append("g") // create another SVG group
+				.attr("transform", "translate(0, 0)");
+
+		let dotLayer = this.svg.append("g") // create another SVG group
+				// give it the "dot" class
+				.attr("class", "dot") 
+				.attr("transform", "translate(0, 0)");
+
+      	this.highlightWomen.forEach((highlightWoman, index) => {
+      		lineLayer.append("line")
+      			.attr("id", `highlightWomanLine_${index}`)
+				.attr("x1", this.scaleX(highlightWoman["time"]))  //<<== change your code here
 				.attr("y1", 0)
-				.attr("x2", this.scaleX(time))  //<<== and here
+				.attr("x2", this.scaleX(highlightWoman["time"]))  //<<== and here
 				.attr("y2", this.chartRangeHeight)
 				.style("stroke-width", 2)
 				.attr("stroke-dasharray", "8,8")
 				.style("stroke", "black")
 				.style("fill", "none");
+
+			dotLayer.append("circle") // create an SVG circle for every data point
+					// give the SVG path coordinates
+					// this will effectively absolutely position the token
+      				.attr("id", `highlightWomanCircle_${index}`)
+					.attr("cx", this.scaleX(highlightWoman["time"]))
+					.attr("cy", 25)
+					.attr("r", 30)
+					.attr("stroke", "#eee")
+					.attr("fill", "#69B3A2")
+					//.attr("fill-opacity", 0.7)
+					.style("fill", `url(#highlightwoman_${index})`);
       	});
 
       	this.showHideShadowPlot();
