@@ -187,7 +187,7 @@ class DensityPlot extends ClassicPlot {
       			.attr("transform", `translate(0, ${this.chartRangeHeight})`)
       			.call(d3.axisBottom(this.scaleX)
       					.tickValues(d3.range(60, 800, 60))
-      					.tickFormat((secs, i) => d3.timeFormat("%M:%S")(Helpers.secondsToDate(secs))));
+      					.tickFormat((secs, i) => d3.timeFormat("%M'%S")(Helpers.secondsToDate(secs))));
   		
   			xAxis.selectAll("text")
   			 .attr("color", "#6b6b6b");
