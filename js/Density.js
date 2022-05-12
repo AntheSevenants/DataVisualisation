@@ -46,6 +46,8 @@ class DensityPlot extends ClassicPlot {
 		this.menData = this.data.filter(d => d["gender"] == "M")
   								.map(d => (+d["time"]));
 
+  		this.highlightWomen = [ 254, 532 ];
+
   		this.updateWomen();
 	}
 
@@ -218,6 +220,18 @@ class DensityPlot extends ClassicPlot {
 
 			this.curves.push(curve);
 		    });
+
+      	this.highlightWomen.forEach((time, index) => {
+      		this.svg.append("line")
+				.attr("x1", this.scaleX(time))  //<<== change your code here
+				.attr("y1", 0)
+				.attr("x2", this.scaleX(time))  //<<== and here
+				.attr("y2", this.chartRangeHeight)
+				.style("stroke-width", 2)
+				.attr("stroke-dasharray", "8,8")
+				.style("stroke", "black")
+				.style("fill", "none");
+      	});
 
       	this.showHideShadowPlot();
 	}
