@@ -58,11 +58,16 @@ Promise.all(files).then((promiseData) => {
 					   "Women": [ "competence", "enjoyment", "fitness" ] });
 
 	new GroupedBarChart("chartTimeOfDayPlot",
-						timeOfDayData, true);
+						timeOfDayData,
+						"Time of day",
+						true);
 
 	new GroupedBarChart("chartWeekdayPlot",
-						weekdayData);
+						weekdayData,
+						"Day of the week");
 
 	new GroupedBarChart("chartTemperatureBarPlot",
-						temperatureData, true);
+						temperatureData,
+						"Temperature",
+						true);
 });

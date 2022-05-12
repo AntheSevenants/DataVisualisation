@@ -1,5 +1,5 @@
 class GroupedBarChart extends ClassicPlot {
-	constructor(targetElementName, data, needsLineBreaks=false) {
+	constructor(targetElementName, data, xTitle, needsLineBreaks=false) {
 		super(targetElementName,
 			  "bar",
 			  true);
@@ -10,6 +10,8 @@ class GroupedBarChart extends ClassicPlot {
 
 		this.subgroups = this.data.columns.slice(1)
 		this.groups = this.data.map(d => d["group"]);
+
+		this.xTitle = xTitle;
 
 		this.initPlot();
 		this.drawPlot();
@@ -23,14 +25,15 @@ class GroupedBarChart extends ClassicPlot {
 
 		this.dimensions["padding"] = 60;
 		this.dimensions["height"] = 400;
-		this.chartRangeHeight = this.dimensions["height"] - this.dimensions["padding"] * 2;
+		this.chartRange = this.chartRange - 40;
+		this.chartRangeHeight = this.dimensions["height"] - this.dimensions["padding"] - 15;
 
 		this.svg.attr("width", this.dimensions["width"])
 				.attr("height", this.dimensions["height"]);
 
 		this.svg = this.svg.append("g")
 						   .attr("transform",
-					  		`translate(40, 10)`);
+					  		`translate(70, 10)`);
 
 		this.scaleX = d3.scaleBand()
 				  .domain(this.groups)
@@ -66,10 +69,26 @@ class GroupedBarChart extends ClassicPlot {
     		 //.attr("transform", "translate(-10,0)") /* rotate(-45)*/
     		 .style("text-anchor", "middle");
 
+      	// text label for the x axis
+  		this.svg.append("text")             
+      		    .attr("transform", `translate(${this.chartRange / 2},
+      		    					${this.dimensions["height"] - 15})`)
+      			.style("text-anchor", "middle")
+      			.text(this.xTitle);
+
 		// Draw Y axis
 		this.svg.append("g")
   				.call(d3.axisLeft(this.scaleY)
   						.tickFormat(d => `${d}%`));
+
+      	// text label for the y axis
+      	this.originalSvg.append("text")
+      			.attr("transform", "rotate(-90)")
+      			.attr("y", 10)
+      			.attr("x", 0 - (this.chartRangeHeight / 2))
+      			.attr("dy", "1em")
+      			.style("text-anchor", "middle")
+      			.text("share (bigger is larger)");
 
 		// Draw bars
 		this.svg.append("g")
@@ -97,7 +116,7 @@ class GroupedBarChart extends ClassicPlot {
       	// Handmade legend
       	this.subgroups.forEach((subgroup, index) => {
 	  		this.svg.append("circle")
-	  				.attr("cx", this.dimensions["width"] - 70)
+	  				.attr("cx", this.dimensions["width"] - 100)
 	  				.attr("cy",30 * (index))
 	  				.attr("r", 6)
 	  				.attr("fill-opacity", 0.6)
@@ -105,7 +124,7 @@ class GroupedBarChart extends ClassicPlot {
 	  				.style("fill", this.colour(subgroup));
   			
   			this.svg.append("text")
-  					.attr("x", this.dimensions["width"] - 90)
+  					.attr("x", this.dimensions["width"] - 120)
   					.attr("y", 30 * (index))
   					.text(subgroup)
   					.style("font-size", "15px")
