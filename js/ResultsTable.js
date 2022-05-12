@@ -14,9 +14,12 @@ class ResultsTable {
 	initTable() {
 		console.log(this.targetElement);
 
+		let highlightWomenIds = Constants.highlightWomen.map(effort => effort["id"]);
+
 		let dataTableColumns = [ "#", "Time" ];
 		let dataTableRows = this.efforts.map((effort, index) => 
-			([ index + 1,
+			([ (index + 1).toString() + (highlightWomenIds.includes(effort["id"]) ? 
+					`<img src="data/highlightwoman_${highlightWomenIds.indexOf(effort["id"])}.jpg">` : ""),
 			   d3.timeFormat("%M:%S")(Helpers.secondsToDate(+effort["time"])) ]));
 		let dataTableGender = this.efforts.map((effort, index) => effort["gender"]);
 
@@ -24,7 +27,7 @@ class ResultsTable {
 
 		// Add the table to the target element
 		this.table = this.targetElement.append("table")
-									   .attr("class", "table");
+									   .attr("class", "table results");
 
 		// Prepare the headings
 		this.table.append("thead")
@@ -52,6 +55,6 @@ class ResultsTable {
 			.append("td")
 			.classed("bold", (value, index) => index == 0)
 			//.attr("data-th", row => row["name"])
-			.text(value => value);
+			.html(value => value);
 	}
 }
