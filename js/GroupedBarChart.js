@@ -90,7 +90,7 @@ class GroupedBarChart extends ClassicPlot {
       			.attr("x", 0 - (this.chartRangeHeight / 2))
       			.attr("dy", "1em")
       			.style("text-anchor", "middle")
-      			.text("share (bigger is larger)");
+      			.text("% of runners (bigger is more runners that day)");
 
 		// Draw bars
 		this.svg.append("g")
