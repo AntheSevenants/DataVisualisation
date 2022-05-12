@@ -171,7 +171,8 @@ class DensityPlot extends ClassicPlot {
       			   .nice();
 
       	this.svg.append("g")
-      			.call(d3.axisLeft(this.scaleY));
+      			.call(d3.axisLeft(this.scaleY)
+      							.tickFormat(d3.format(".1%")));
 
       	console.log(this.data.filter(d => d["gender"] == "M")
   											 .map(d => (+d["time"])));
