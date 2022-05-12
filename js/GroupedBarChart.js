@@ -119,7 +119,7 @@ class GroupedBarChart extends ClassicPlot {
       			.attr("height", d => this.chartRangeHeight - this.scaleY(d["value"]))
       			.attr("fill", d => this.colour(d["key"]))
 			    .attr("opacity", 0.6)
-			    .attr("stroke", "#000")
+			    //.attr("stroke", "#000")
       			.attr("stroke-width", 1)
       			.attr("stroke-linejoin", "round")
 				.on("mouseover", mouseOver)

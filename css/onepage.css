@@ -83,11 +83,17 @@ p.offset {
 }
 
 .tooltip {
+  color: #111 !important;
+  background-color: #ffffff;
   border-radius: 5px;
   padding: 5px 7px 5px 7px;
-  border: 1px solid #111;
+  border: 2px solid #111;
 }
 
 .tooltip.men {
-  border-color: #eee;
+  border-color: #656FBA;
+}
+
+.tooltip.women {
+  border-color: #F7F2A3;
 }

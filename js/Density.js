@@ -231,7 +231,7 @@ class DensityPlot extends ClassicPlot {
 			    	.datum(density)
 			    	.attr("fill", this.histogramStyles[index]["fill"])
 			    	.attr("opacity", !(index == 2) ? 0.6 : 0.1)
-			    	.attr("stroke", "#000")
+			    	//.attr("stroke", "#000")
       				.attr("stroke-width", 1)
       				.attr("stroke-linejoin", "round")
 			    	.attr("d", d3.line()
