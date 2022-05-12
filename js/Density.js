@@ -197,6 +197,7 @@ class DensityPlot extends ClassicPlot {
       		    .attr("transform", `translate(${this.chartRange / 2},
       		    					${this.chartRangeHeight + 40})`)
       			.style("text-anchor", "middle")
+  					.attr("fill", "#6b6b6b")
       			.text("1000m running time (lower is better)");
 
       	// Y axis
@@ -210,6 +211,7 @@ class DensityPlot extends ClassicPlot {
       			.attr("x", 0 - (this.chartRangeHeight / 2))
       			.attr("dy", "1em")
       			.style("text-anchor", "middle")
+  					.attr("fill", "#6b6b6b")
       			.text("density (higher means more entries)");   		   
 
       	let yAxis = this.svg.append("g")

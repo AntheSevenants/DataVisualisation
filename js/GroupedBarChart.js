@@ -83,6 +83,7 @@ class GroupedBarChart extends ClassicPlot {
       		    .attr("transform", `translate(${this.chartRange / 2},
       		    					${this.dimensions["height"] - 15})`)
       			.style("text-anchor", "middle")
+  				.attr("fill", "#6b6b6b")
       			.text(this.xTitle);
 
 		// Draw Y axis
@@ -100,6 +101,7 @@ class GroupedBarChart extends ClassicPlot {
       			.attr("x", 0 - (this.chartRangeHeight / 2))
       			.attr("dy", "1em")
       			.style("text-anchor", "middle")
+  				.attr("fill", "#6b6b6b")
       			.text("% of runners (bigger is more runners that day)");
 
       	let mouseOver = this.mouseOver.bind(this);
