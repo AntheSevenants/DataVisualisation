@@ -30,7 +30,7 @@ class GroupedBarChart extends ClassicPlot {
 
 		this.svg = this.svg.append("g")
 						   .attr("transform",
-					  		`translate(20, 10)`);
+					  		`translate(40, 10)`);
 
 		this.scaleX = d3.scaleBand()
 				  .domain(this.groups)
@@ -68,7 +68,8 @@ class GroupedBarChart extends ClassicPlot {
 
 		// Draw Y axis
 		this.svg.append("g")
-  				.call(d3.axisLeft(this.scaleY));
+  				.call(d3.axisLeft(this.scaleY)
+  						.tickFormat(d => `${d}%`));
 
 		// Draw bars
 		this.svg.append("g")
