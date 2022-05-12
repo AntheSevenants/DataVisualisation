@@ -21,6 +21,8 @@ class GeoRunningPlot extends MapPlot {
 			this.toolbar = toolbar;
 		}
 
+		this.multiplier = multiplier;
+
 		this._playing = false;
 
 		this.initData(efforts, true);
@@ -46,7 +48,7 @@ class GeoRunningPlot extends MapPlot {
 											  			    distance: this.segment["distance"],
 											  			    icon: L.icon({ iconUrl: `minimap/${this.conversion[effort["gender"]]}.png`,
 											  			    			   iconSize: 8 }),
-											  			    interval: effort["time"] * 1000,
+											  			    interval: (effort["time"] * 1000) / this.multiplier,
 											  			    onEnd: () => { this.ended = true;
 											  			    			   if (index == 0) {
 											  			    			   	this.playing = false;

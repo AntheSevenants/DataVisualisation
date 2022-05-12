@@ -18,6 +18,11 @@ Promise.all(files).then((promiseData) => {
 				  new DummyAffirmativeAction(),
 				  true);
 
+	new DensityPlot("chartOriginalHistogramRepeat",
+				  data,
+				  new DummyAffirmativeAction(),
+				  true);
+
 	let sample = Helpers.sample(data);
 	sample.sort(Helpers.timeSort);
 

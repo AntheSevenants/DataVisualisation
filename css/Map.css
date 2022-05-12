@@ -12,7 +12,7 @@
 	position: relative;
 }
 
-.map-container .toolbar {
+.map-container .toolbar, .map-container .notice {
 	position: absolute;
 	background-color: #ffffff;
 	width: auto;
@@ -25,6 +25,11 @@
     left: 50%;
 
     transform: translateX(-50%);
+}
+
+.map-container .notice {
+	bottom: auto;
+	top: 15px;
 }
 
 .map-container .toolbar button {

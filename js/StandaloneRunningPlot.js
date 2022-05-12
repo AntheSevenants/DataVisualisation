@@ -2,6 +2,13 @@ class StandaloneRunningPlot extends GeoRunningPlot {
 	constructor(targetElementName, segment, efforts, toolbar, multiplier=1) { 
 		super(targetElementName, segment, efforts, toolbar, multiplier)
 		this.initToolbar();
+		this.initMultiplierNotice();
+	}
+
+	initMultiplierNotice() {
+		this.multiplierNotice = this.originalTargetElement.append("div")
+										 				  .attr("class", "notice")
+										 				  .html(`x${this.multiplier} speed`);
 	}
 
 	/*initToolbar() {

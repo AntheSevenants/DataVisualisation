@@ -58,7 +58,8 @@ class CheckboxHistogramMap {
 			this.standaloneRunningPlot = new StandaloneRunningPlot(this.mapElementName,
 																   this.segment,
 																   slicedData,
-																   toolbar);
+																   toolbar,
+																   5);
 		} else {
 			this.standaloneRunningPlot.initData(slicedData);
 		}
