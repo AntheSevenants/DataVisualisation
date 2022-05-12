@@ -4,7 +4,9 @@ class GroupedBarChart extends ClassicPlot {
 			  "bar",
 			  true);
 		this.data = data;
-		this.maxNum = 100;
+
+		this.maxNum = Math.max(...this.data.map(row => Math.max(...Object.values(row).slice(1))));
+		this.maxNum = Math.ceil(this.maxNum / 10) * 10;
 
 		this.needsLineBreaks = needsLineBreaks;
 
