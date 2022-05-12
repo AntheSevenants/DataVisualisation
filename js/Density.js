@@ -61,7 +61,8 @@ class DensityPlot extends ClassicPlot {
 
 		this.curves = [];
 
-		this.dimensions["height"] = 400;
+		this.dimensions["height"] = 420;
+		this.dimensions["padding"] = 60;
 		this.chartRangeHeight = this.dimensions["height"] - this.dimensions["padding"];
 
 		this.svg.attr("width", this.dimensions["width"])
@@ -165,10 +166,26 @@ class DensityPlot extends ClassicPlot {
       					.tickValues(d3.range(60, 800, 60))
       					.tickFormat((secs, i) => d3.timeFormat("%M:%S")(Helpers.secondsToDate(secs))));
 
+      	// text label for the x axis
+  		this.svg.append("text")             
+      		    .attr("transform", `translate(${this.chartRange / 2},
+      		    					${this.chartRangeHeight + 40})`)
+      			.style("text-anchor", "middle")
+      			.text("1000m running time (lower is better)");
+
       	// Y axis
       	this.scaleY.domain([0,
       						this.maxY == null ? 0.01 : 0.014])
       			   .nice();
+
+      	// text label for the y axis
+      	this.svg.append("text")
+      			.attr("transform", "rotate(-90)")
+      			.attr("y", 0 - this.dimensions["padding"])
+      			.attr("x", 0 - (this.chartRangeHeight / 2))
+      			.attr("dy", "1em")
+      			.style("text-anchor", "middle")
+      			.text("density (higher means more entries)");   		   
 
       	this.svg.append("g")
       			.call(d3.axisLeft(this.scaleY)
