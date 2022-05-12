@@ -279,7 +279,7 @@ class DensityPlot extends ClassicPlot {
 				.attr("y2", this.chartRangeHeight)
 				.style("stroke-width", 2)
 				.attr("stroke-dasharray", "8,8")
-				.style("stroke", "black")
+				.style("stroke", "#111")
 				.style("fill", "none");
 
 			dotLayer.append("circle") // create an SVG circle for every data point
@@ -289,7 +289,7 @@ class DensityPlot extends ClassicPlot {
 					.attr("cx", this.scaleX(highlightWoman["time"]))
 					.attr("cy", 25)
 					.attr("r", 30)
-					.attr("stroke", "#eee")
+					.attr("stroke", "#999999")
 					.attr("fill", "#69B3A2")
 					//.attr("fill-opacity", 0.7)
 					.style("fill", `url(#highlightwoman_${index})`);
