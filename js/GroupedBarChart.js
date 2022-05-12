@@ -57,6 +57,12 @@ class GroupedBarChart extends ClassicPlot {
 	}
 
 	drawPlot() {
+		this.tooltip = this.targetElement
+						   .append("div")
+						   .style("display", "none")
+						   .style("opacity", "1")
+						   .attr("class", "tooltip");
+
 		// Draw X axis
 		let xAxis = this.svg.append("g")
   				.attr("transform", "translate(0," + this.chartRangeHeight + ")")
@@ -92,6 +98,10 @@ class GroupedBarChart extends ClassicPlot {
       			.style("text-anchor", "middle")
       			.text("% of runners (bigger is more runners that day)");
 
+      	let mouseOver = this.mouseOver.bind(this);
+      	let mouseMove = this.mouseMove.bind(this);
+      	let mouseLeave = this.mouseLeave.bind(this);
+
 		// Draw bars
 		this.svg.append("g")
 				.selectAll("g")
@@ -111,7 +121,11 @@ class GroupedBarChart extends ClassicPlot {
 			    .attr("opacity", 0.6)
 			    .attr("stroke", "#000")
       			.attr("stroke-width", 1)
-      			.attr("stroke-linejoin", "round");
+      			.attr("stroke-linejoin", "round")
+				.on("mouseover", mouseOver)
+      			.on("mousemove", mouseMove)
+      			.on("mouseleave", mouseLeave);
+;
 	}
 
 	drawLegend() {
@@ -135,4 +149,20 @@ class GroupedBarChart extends ClassicPlot {
   					.attr("text-anchor", "end");
   		});
 	}
+
+	mouseOver(d, data) {   	
+    	this.tooltip.html(`<strong>${data["key"]}:</strong> ${Math.round(data["value"] * 100) / 100}%`)
+        			.style("display", "block")
+        			.classed("men", data["key"] == "men")
+        			.classed("women", data["key"] == "women")
+  	}
+  	
+  	mouseMove(event, miep, moep) {
+    	this.tooltip.style("left", (event["offsetX"] + 10) + "px") // It is important to put the +90: other wise the tooltip is exactly where the point is an it creates a weird effect
+      				.style("top", (event["offsetY"] + 4) + "px")
+  	}
+   	
+   	mouseLeave(d) {
+    	this.tooltip.style("display", "none");
+  	}
 }
