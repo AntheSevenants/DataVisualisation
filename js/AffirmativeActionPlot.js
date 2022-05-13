@@ -34,7 +34,9 @@ class AffirmativeActionPlot {
 		if (this.standaloneRunningPlot == null) {
 			this.standaloneRunningPlot = new StandaloneRunningPlot(this.mapElementName,
 																   this.segment,
-																   slicedData);
+																   slicedData,
+																   false,
+																   5);
 		} else {
 			this.standaloneRunningPlot.initData(slicedData);
 		}
