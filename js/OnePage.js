@@ -76,3 +76,5 @@ Promise.all(files).then((promiseData) => {
 						"Temperature",
 						true);
 });
+
+window.onresize = () => { location.reload(); }
