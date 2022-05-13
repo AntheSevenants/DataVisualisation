@@ -304,7 +304,6 @@ class DensityPlot extends ClassicPlot {
 
 	drawLegend() {
 		// Remove pre-existing legend things
-		console.log(this.svg.selectAll(".legend_piece"));
 		this.svg.selectAll(".legend_piece").remove();
 
       	// Handmade legend
@@ -321,10 +320,15 @@ class DensityPlot extends ClassicPlot {
 	  				.attr("class", "legend_piece")
 	  				.style("fill", this.histogramStyles[index]["fill"])
   			
+	  		let text = this.histogramStyles[index]["name"];
+	  		if (index == 1 && !this.noShadowBins) {
+	  			text = "Boosted women";
+	  		}
+
   			this.svg.append("text")
   					.attr("x", this.dimensions["width"] - 120)
   					.attr("y", 30 * (index + 1))
-  					.text(this.histogramStyles[index]["name"])
+  					.text(text)
   					.style("font-size", "15px")
 	  				.attr("class", "legend_piece")
   					.attr("alignment-baseline","middle")
