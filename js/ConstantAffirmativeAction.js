@@ -4,7 +4,7 @@ class ConstantAffirmativeAction extends AffirmativeAction {
 
 		this.valueFunction = (value) => value - this.variable;
 		this.formatFunction = () => { let date = Helpers.secondsToDate(this.variable);
-									  let formatted = d3.timeFormat("%M:%S")(date);
+									  let formatted = d3.timeFormat("%M'%S\"")(date);
 									  return `-${formatted}`; };
 
 		this.reverseSlider = true;
