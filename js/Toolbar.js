@@ -18,13 +18,17 @@ class Toolbar {
 
 	registerText(name, default_value) {
 		this.elements[name] = this.targetElement.append("div")
-												.style("width", "5em")
+												.attr("class", "slidervalue")
 												.text(default_value);
 	}
 
 	registerSlider(name, range, default_value, onChangeEvent, reverseSlider=false) {
-		this.targetElement.append("input")
-												.attr("id", "affirmative_slider");
+		let sliderContainer = this.targetElement.append("div")
+						  .attr("class", "slidercontainer")
+		
+		sliderContainer.append("input")
+						   .attr("id", "affirmative_slider")
+						   .style("width", sliderContainer.style("width"));
 
 		this.elements[name] = new Slider("#affirmative_slider", {
 			"ticks": [0, 30, 60, 90, 120],
@@ -35,6 +39,8 @@ class Toolbar {
 			"value": default_value,
 			"tooltip": "hide",
 			"reversed": "true"
-		}).on("change", onChangeEvent);
+		});
+
+		this.elements[name].on("change", onChangeEvent);
 	}
 }

@@ -57,8 +57,8 @@ p.offset {
   padding-right: 1em;
 }
 
-.toolbar input[type="range"], .toolbar .slider.slider-horizontal {
-  width: calc(100% - 5em);
+.toolbar input[type="range"], .toolbar .slidercontainer {
+  width: 100%;
 }
 
 .toolbar .slider.slider-horizontal .slider-handle {
@@ -79,6 +79,10 @@ p.offset {
   align-items: center;
 
   margin-top: 1em;
+}
+
+.toolbar .slidervalue {
+  width: 5em;
 }
 
 .results img {
@@ -110,4 +114,10 @@ p.offset {
 
 .tooltip.women {
   border-color: #F7F2A3;
+}
+
+.highlightwoman {
+  width: 100%;
+  max-width: 250px;
+  height: auto;
 }
