@@ -57,14 +57,28 @@ p.offset {
   padding-right: 1em;
 }
 
-.toolbar input[type="range"] {
-  width: 100%;
+.toolbar input[type="range"], .toolbar .slider.slider-horizontal {
+  width: calc(100% - 5em);
+}
+
+.toolbar .slider.slider-horizontal .slider-handle {
+  background: #ded992;
+}
+
+.toolbar .slider.slider-horizontal .slider-selection{
+  background: #F7F2A3;
+}
+
+.toolbar .slider-tick.in-selection {
+  background: #F7F2A3;
 }
 
 .toolbar.slider {
   display: flex;
   justify-content: center;
   align-items: center;
+
+  margin-top: 1em;
 }
 
 .results img {

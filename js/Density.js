@@ -95,7 +95,8 @@ class DensityPlot extends ClassicPlot {
 		this.toolbar.registerSlider("slider",
 							this.affirmativeAction.range,
 							this.affirmativeAction.defaultValue,
-							(event) => { this.affirmativeAction.variable = event.target.value;
+							(event) => { this.affirmativeAction.variable = event["newValue"];
+														//this.affirmativeAction.variable = event.target.value;
 										 this.toolbar.elements["multiplier"].text(this.affirmativeAction.formatFunction());
 										 this.updateWomen();
 										 this.updatePlot();

@@ -23,14 +23,18 @@ class Toolbar {
 	}
 
 	registerSlider(name, range, default_value, onChangeEvent, reverseSlider=false) {
-		this.elements[name] = this.targetElement.append("input")
-												.attr("type", "range")
-												.attr("class", "form-range")
-												.attr("min", range[0].toString())
-												.attr("max", range[1].toString())
-												.attr("step", range[2].toString())
-												.attr("value", default_value)
-												.style("direction", reverseSlider ? "rtl" : "ltr")
-												.on("change", onChangeEvent);
+		this.targetElement.append("input")
+												.attr("id", "affirmative_slider");
+
+		this.elements[name] = new Slider("#affirmative_slider", {
+			"ticks": [0, 30, 60, 90, 120],
+			"ticks_labels": ["-0'00\"","-0'30\"","-1'00\"","-1'30\"", "-2'00\""],
+			"min": range[0].toString(),
+			"max": range[1].toString(),
+			"step": range[2].toString(),
+			"value": default_value,
+			"tooltip": "hide",
+			"reversed": "true"
+		}).on("change", onChangeEvent);
 	}
 }
