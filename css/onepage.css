@@ -79,6 +79,8 @@ p.offset {
   align-items: center;
 
   margin-top: 1em;
+
+  overflow-x: hidden;
 }
 
 .toolbar .slidervalue {

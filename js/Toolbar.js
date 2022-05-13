@@ -26,9 +26,11 @@ class Toolbar {
 		let sliderContainer = this.targetElement.append("div")
 						  .attr("class", "slidercontainer")
 		
+		let sliderWidth = parseInt(sliderContainer.style("width")) - 20;
+
 		sliderContainer.append("input")
 						   .attr("id", "affirmative_slider")
-						   .style("width", sliderContainer.style("width"));
+						   .style("width", `${sliderWidth}px`);
 
 		this.elements[name] = new Slider("#affirmative_slider", {
 			"ticks": [0, 30, 60, 90, 120],
