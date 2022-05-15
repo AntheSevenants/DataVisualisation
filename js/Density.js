@@ -264,7 +264,7 @@ class DensityPlot extends ClassicPlot {
 		    	.attr("height", 1)
 		    	.attr("width", 1)
 		    	.attr("preserveAspectRatio", "none")
-		    	.attr("xlink:href", (d, index) => `data/highlightwoman_${index}.jpg`);
+		    	.attr("xlink:href", (d, index) => `assets/highlightwoman_${index}.jpg`);
 
 		let lineLayer = this.svg.append("g") // create another SVG group
 				.attr("transform", "translate(0, 0)");
