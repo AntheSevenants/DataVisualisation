@@ -84,7 +84,8 @@ p.offset {
 }
 
 .toolbar .slidervalue {
-  width: 5em;
+  width: 7em;
+  font-weight: bold;
 }
 
 .results img {
