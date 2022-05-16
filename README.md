@@ -5,7 +5,7 @@ This repository contains all components and other things related to my group pro
 The website consists of three parts:
 1.  An **introduction** part, where we explain that men and women's running habits are actually very comparable.
 2.  An **analysis** part, where we show that there is still a performance gap between men and women, and we try to explain where this gap comes from
-3.  An **explorative** part, where we provide two methods to shorten the gap between man and women
+3.  An **explorative** part, where we provide two methods to shorten the gap between men and women
 
 The visualisations are mostly made using [d3.js](https://d3js.org/). Most of them are based on examples from the [d3 graph gallery](https://d3-graph-gallery.com/), but they are definitely 'supercharged' to fit the project. Some highlights:
 
