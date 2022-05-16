@@ -47,7 +47,7 @@ class GeoRunningPlot extends MapPlot {
 											  			  	zIndexOffset: Helpers.zIndexFromIndex(index, effort["gender"]),
 											  			    distance: this.segment["distance"],
 											  			    icon: L.icon({ iconUrl: `minimap/${this.conversion[effort["gender"]]}.png`,
-											  			    			   iconSize: 8 }),
+											  			    			   iconSize: 12 }),
 											  			    interval: (effort["time"] * 1000) / this.multiplier,
 											  			    onEnd: () => { this.ended = true;
 											  			    			   if (index == 0) {
