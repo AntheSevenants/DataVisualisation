@@ -1,6 +1,12 @@
 class Helpers {
-	static zIndexFromIndex(index) {
-		return 1000 - index;
+	static zIndexFromIndex(index, gender) {
+		console.log(index);
+
+		if (gender == "M") {
+			return 1000 - index;
+		} else if (gender == "F") {
+			return 2000 - index;
+		}
 	}
 
 	static secondsToDate(seconds) {
