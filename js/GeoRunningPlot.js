@@ -44,7 +44,7 @@ class GeoRunningPlot extends MapPlot {
 
 		this.animatedMarkers = this.efforts.map((effort, index) => L.animatedMarker(this.polyline.getLatLngs(),
 											  			  { autoStart: false,
-											  			  	zIndexOffset: Helpers.zIndexFromIndex(index),
+											  			  	zIndexOffset: Helpers.zIndexFromIndex(index, effort["gender"]),
 											  			    distance: this.segment["distance"],
 											  			    icon: L.icon({ iconUrl: `minimap/${this.conversion[effort["gender"]]}.png`,
 											  			    			   iconSize: 8 }),
