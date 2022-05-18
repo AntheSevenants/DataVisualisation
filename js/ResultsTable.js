@@ -19,7 +19,7 @@ class ResultsTable {
 		let dataTableColumns = [ "#", "Time" ];
 		let dataTableRows = this.efforts.map((effort, index) => 
 			([ (index + 1).toString() + (highlightWomenIds.includes(effort["id"]) ? 
-					`<img src="data/highlightwoman_${highlightWomenIds.indexOf(effort["id"])}.jpg">` : ""),
+					`<img src="assets/highlightwoman_${highlightWomenIds.indexOf(effort["id"])}.jpg">` : ""),
 			   d3.timeFormat("%M:%S")(Helpers.secondsToDate(+effort["time"])) ]));
 		let dataTableGender = this.efforts.map((effort, index) => effort["gender"]);
 
